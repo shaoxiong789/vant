@@ -3,6 +3,7 @@ import Actionsheet from './actionsheet';
 import AddressEdit from './address-edit';
 import AddressList from './address-list';
 import Area from './area';
+import Avatar from './avatar';
 import Badge from './badge';
 import BadgeGroup from './badge-group';
 import Button from './button';
@@ -23,6 +24,7 @@ import CouponCell from './coupon-cell';
 import CouponList from './coupon-list';
 import DatetimePicker from './datetime-picker';
 import Dialog from './dialog';
+import EmployeeField from './employee-field';
 import Field from './field';
 import GoodsAction from './goods-action';
 import GoodsActionBigBtn from './goods-action-big-btn';
@@ -74,6 +76,7 @@ const components = [
   AddressEdit,
   AddressList,
   Area,
+  Avatar,
   Badge,
   BadgeGroup,
   Button,
@@ -94,6 +97,7 @@ const components = [
   CouponList,
   DatetimePicker,
   Dialog,
+  EmployeeField,
   Field,
   GoodsAction,
   GoodsActionBigBtn,
@@ -156,6 +160,7 @@ export {
   AddressEdit,
   AddressList,
   Area,
+  Avatar,
   Badge,
   BadgeGroup,
   Button,
@@ -176,6 +181,7 @@ export {
   CouponList,
   DatetimePicker,
   Dialog,
+  EmployeeField,
   Field,
   GoodsAction,
   GoodsActionBigBtn,

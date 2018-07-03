@@ -299,6 +299,14 @@ module.exports = {
               {
                 path: '/sku',
                 title: 'Sku - 商品规格弹层'
+              },
+              {
+                path: '/employee-field',
+                title: 'EmployeeField - 人员选择器'
+              },
+              {
+                path: '/avatar',
+                title: 'Avatar - 头像'
               }
             ]
           }
@@ -595,6 +603,10 @@ module.exports = {
               {
                 path: '/sku',
                 title: 'Sku'
+              },
+              {
+                path: '/employee-field',
+                title: 'EmployeeField'
               }
             ]
           }

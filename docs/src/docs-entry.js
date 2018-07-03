@@ -19,6 +19,8 @@ export default {
   'address-list.zh-CN': () => import('../../packages/address-list/zh-CN.md'),
   'area.en-US': () => import('../../packages/area/en-US.md'),
   'area.zh-CN': () => import('../../packages/area/zh-CN.md'),
+  'avatar.en-US': () => import('../../packages/avatar/en-US.md'),
+  'avatar.zh-CN': () => import('../../packages/avatar/zh-CN.md'),
   'badge.en-US': () => import('../../packages/badge/en-US.md'),
   'badge.zh-CN': () => import('../../packages/badge/zh-CN.md'),
   'button.en-US': () => import('../../packages/button/en-US.md'),

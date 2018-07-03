@@ -12,7 +12,7 @@
         <div
           v-for="(tab, index) in tabs"
           ref="tabs"
-          class="van-tab"
+          class="van-tab" :key="index"
           :class="{
             'van-tab--active': index === curActive,
             'van-tab--disabled': tab.disabled
