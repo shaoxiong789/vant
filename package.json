@@ -50,7 +50,9 @@
   "license": "MIT",
   "dependencies": {
     "babel-runtime": "6.x",
-    "vue-lazyload": "^1.2.6"
+    "better-scroll": "^1.12.4",
+    "vue-lazyload": "^1.2.6",
+    "vue2-better-scroll": "^1.0.7"
   },
   "peerDependencies": {
     "vue": ">= 2.5.0"

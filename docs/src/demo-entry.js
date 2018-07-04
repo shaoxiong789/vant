@@ -18,6 +18,7 @@ export default {
   'collapse': () => wrapper(import('../../packages/collapse/demo'), 'collapse'),
   'contact-card': () => wrapper(import('../../packages/contact-card/demo'), 'contact-card'),
   'coupon-list': () => wrapper(import('../../packages/coupon-list/demo'), 'coupon-list'),
+  'crumb': () => wrapper(import('../../packages/crumb/demo'), 'crumb'),
   'datetime-picker': () => wrapper(import('../../packages/datetime-picker/demo'), 'datetime-picker'),
   'dialog': () => wrapper(import('../../packages/dialog/demo'), 'dialog'),
   'employee-field': () => wrapper(import('../../packages/employee-field/demo'), 'employee-field'),

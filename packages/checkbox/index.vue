@@ -8,7 +8,7 @@
           'van-checkbox--disabled': isDisabled,
           'van-checkbox--checked': checked
       }]"
-      @click="onClick"
+      @click.stop="onClick"
     />
     <span v-if="$slots.default" :class="b('label')" @click="onClick('label')">
       <slot />

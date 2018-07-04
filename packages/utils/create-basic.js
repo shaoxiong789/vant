@@ -7,7 +7,6 @@ import i18n from '../mixins/i18n';
 import { isDef } from './';
 
 const install = function(Vue) {
-  console.log(this.name);
   Vue.component(this.name, this);
 };
 

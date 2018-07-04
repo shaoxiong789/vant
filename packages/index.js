@@ -22,6 +22,8 @@ import ContactEdit from './contact-edit';
 import ContactList from './contact-list';
 import CouponCell from './coupon-cell';
 import CouponList from './coupon-list';
+import Crumb from './crumb';
+import CrumbItem from './crumb-item';
 import DatetimePicker from './datetime-picker';
 import Dialog from './dialog';
 import EmployeeField from './employee-field';
@@ -95,6 +97,8 @@ const components = [
   ContactList,
   CouponCell,
   CouponList,
+  Crumb,
+  CrumbItem,
   DatetimePicker,
   Dialog,
   EmployeeField,
@@ -179,6 +183,8 @@ export {
   ContactList,
   CouponCell,
   CouponList,
+  Crumb,
+  CrumbItem,
   DatetimePicker,
   Dialog,
   EmployeeField,

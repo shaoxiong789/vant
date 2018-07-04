@@ -307,6 +307,10 @@ module.exports = {
               {
                 path: '/avatar',
                 title: 'Avatar - 头像'
+              },
+              {
+                path: '/crumb',
+                title: 'Crumb - 面包屑'
               }
             ]
           }

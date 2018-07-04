@@ -1,36 +1,25 @@
 <template>
-  <div class="wq-breadcrumb">
-    <!-- <vue-better-scroll direction="horizontal" ref="scroll" :width="contentWidth"> -->
+  <div :class="b()">
     <ul :style="{width: contentWidth+'px'}">
-      <slot :list="list"/>
+      <slot/>
     </ul>
-    <!-- </vue-better-scroll> -->
   </div>
 </template>
 <script>
+import create from '../utils/create';
+
 import BScroll from 'better-scroll';
-// import VueBetterScroll from 'vue2-better-scroll';
-export default {
-  name: 'Crumb',
-  props: {
-    list: {
-      type: Array
-    }
-  },
-  // components: { VueBetterScroll },
+export default create({
+  name: 'crumb',
   data() {
     return {
       contentWidth: 0
     };
   },
-  watch: {
-    list() {
-      this.initScroll();
-      console.log('list');
-    }
-  },
   mounted() {
-    console.log('刷新');
+    this.initScroll();
+  },
+  updated() {
     this.initScroll();
   },
   methods: {
@@ -41,38 +30,33 @@ export default {
         }, 0);
         this.contentWidth = width;
         this.$nextTick(() => {
-          const scroll = new BScroll(this.$el, {
+          new BScroll(this.$el, {
             scrollX: true,
-            click: true,
+            // click: true,
             startX: this.$el.offsetWidth - width > 0 ? 0 : this.$el.offsetWidth - width
           });
-          // this.scroll = scroll;
-          console.log(scroll);
         });
       });
     }
   }
-};
+});
 </script>
-<style lang="stylus" scoped>
-.wq-breadcrumb{
+<style>
+.van-crumb{
   line-height: 1.8;
   font-size: 14px;
   overflow: hidden;
-  ul{
-    white-space:nowrap;
-    overflow: hidden;
-  }
+}
+.van-crumb ul{
+  white-space:nowrap;
+  overflow: hidden;
 }
 </style>
-<style lang="stylus">
-.wq-breadcrumb__item:last-child{
+<style>
+.van-crumb-item:last-child{
   color: #999 !important;
 }
-.wq-breadcrumb__item:last-child:after{
+.van-crumb-item:last-child:after{
   display: none;
-}
-.wq-breadcrumb .scroll-content{
-  // width: 500px;
 }
 </style>

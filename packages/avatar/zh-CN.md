@@ -49,3 +49,11 @@ export default {
 <van-avatar name="马明" size="50px" font-size="14px"/>
 <van-avatar name="马明" size="50px" font-size="16px"/>
 ```
+
+#### Avatar API
+
+| 参数 | 说明 | 类型 | 默认值 |
+|-----------|-----------|-----------|-------------|
+| name | 名字 | `String` | - |
+| size | 头像大小 | `String` | - |
+| colors | 颜色集合 | `Array` | `''` |
