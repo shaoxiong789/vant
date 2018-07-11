@@ -28,6 +28,7 @@ export default create({
   props: {
     name: null,
     value: null,
+    keyName: null,
     disabled: Boolean,
     labelDisabled: {
       type: Boolean,
@@ -43,7 +44,12 @@ export default create({
     checked: {
       get() {
         return this.parent
-          ? this.parent.value.indexOf(this.name) !== -1
+          ? this.parent.value.findIndex((element) => {
+            if (this.keyName) {
+              return element[this.keyName] === this.name[this.keyName];
+            }
+            return element === this.name;
+          }) !== -1
           : this.value;
       },
 
@@ -56,12 +62,22 @@ export default create({
               return;
             }
             /* istanbul ignore else */
-            if (parentValue.indexOf(this.name) === -1) {
+            if (parentValue.findIndex((element) => {
+              if (this.keyName) {
+                return element[this.keyName] === this.name[this.keyName];
+              }
+              return element === this.name;
+            }) === -1) {
               parentValue.push(this.name);
               parent.$emit('input', parentValue);
             }
           } else {
-            const index = parentValue.indexOf(this.name);
+            const index = parentValue.findIndex((element) => {
+              if (this.keyName) {
+                return element[this.keyName] === this.name[this.keyName];
+              }
+              return element === this.name;
+            });
             /* istanbul ignore else */
             if (index !== -1) {
               parentValue.splice(index, 1);

@@ -13,6 +13,7 @@
     "types"
   ],
   "scripts": {
+    "build": "npm run build:components && npm run build:vant-css && npm run build:vant",
     "bootstrap": "yarn || npm i && cd ./packages/vant-css/ && yarn || npm i && cd ../../",
     "dev": "npm run build:file && webpack-serve --config build/webpack.dev.js",
     "lint": "eslint ./packages --ext .js,.vue && stylelint \"packages/vant-css/src/*.css\"",
@@ -49,6 +50,7 @@
   "author": "youzanfe",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.18.0",
     "babel-runtime": "6.x",
     "better-scroll": "^1.12.4",
     "vue-lazyload": "^1.2.6",
@@ -78,8 +80,10 @@
     "fast-vue-md-loader": "^1.0.3",
     "gh-pages": "^1.2.0",
     "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.9.4",
     "gulp-iconfont": "^10.0.1",
     "gulp-iconfont-css": "^2.1.0",
+    "gulp-postcss": "^7.0.1",
     "html-webpack-plugin": "3.2.0",
     "husky": "^0.14.3",
     "jest": "^23.2.0",

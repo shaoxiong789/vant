@@ -62,7 +62,7 @@ export default create({
   },
   mounted() {
     if (this.defaultColor) {
-      this.style.defaultColor = this.defaultColor;
+      this.style.backgroundColor = this.defaultColor;
       if (console && console.warn) {
         console.warn('Avatar: defaultColor is deprecated, use colors instead.');
       }

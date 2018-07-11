@@ -49,6 +49,22 @@ export default create({
     }
   },
 
+  mounted() {
+    console.log('search');
+    const input = this.$el.querySelector('input');
+    let cpLock = false;
+    input.addEventListener('compositionstart', () => {
+      cpLock = true;
+    });
+    input.addEventListener('compositionend', (e) => {
+      cpLock = false;
+      if (!cpLock) this.$emit('change');
+    });
+    input.addEventListener('input', (e) => {
+      if (!cpLock) this.$emit('change');
+    });
+  },
+
   methods: {
     onInput(value) {
       this.$emit('input', value);

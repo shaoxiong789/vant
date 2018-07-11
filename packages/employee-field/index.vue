@@ -1,33 +1,33 @@
 <template>
   <div class="wq_employee_field">
     <van-search
+      v-if="searchShow" @change="searchEmployee"
       ref="search" placeholder="找人" v-model="search" :show-action='showAction'
       @focus="onFocus" @cancel="onCancel"/>
     <div v-if="showAction" class="search_list">
-      <vue-better-scroll
-        :scrollbar="true" style="height:100%;" v-if="searchEmployeesData.list.length>0" ref="search_list" :pull-up-load="{
+      <!-- <vue-better-scroll
+        :scrollbar="true" style="height:100%;" v-if="searchEmployeesData.list.length>0" ref="search_list"
+        :pull-up-load="{
           threshold: 0,
           txt: {
             more: '',
             noMore: '没有更多数据了'
           }
         }"
-        @pullingUp="onSearchPullingUp">
-        <div v-if="searchEmployeesData.list.length>0">
-          <van-checkbox-group v-model="result">
-            <van-cell-group>
-              <van-cell :title="employee.name" :label="employee.title" class="employee_cell" v-for="(employee,index) in searchEmployeesData.list" :key="index">
-                <template slot="icon">
-                  <van-checkbox class="em_checkbox" :name="employee"/>
-                  <avatar :src="employee.portrait" :name="employee.name" size="30px" font-size="12px" style="margin-right: 10px;"/>
-                </template>
-
-                <!-- <span class="employee_title">前端开发工程师</span> -->
-              </van-cell>
-            </van-cell-group>
-          </van-checkbox-group>
-        </div>
-      </vue-better-scroll>
+        @pullingUp="onSearchPullingUp"> -->
+      <div v-if="searchEmployeesData.list.length>0">
+        <van-checkbox-group v-model="result[group.groupType]" v-for="(group, index) in searchEmployeesData.list" :key="index">
+          <van-cell-group>
+            <van-cell :title="employee.title" :label="employee.subTitle" class="employee_cell" v-for="(employee,index) in group.groupDatas" :key="index">
+              <template slot="icon">
+                <van-checkbox key-name="identity" class="em_checkbox" :name="employee"/>
+                <avatar :name="employee.iconName.name" size="30px" font-size="12px" style="margin-right: 10px;"/>
+              </template>
+            </van-cell>
+          </van-cell-group>
+        </van-checkbox-group>
+      </div>
+      <!-- </vue-better-scroll> -->
     </div>
     <div class="branch_list" v-else>
       <div class="crumb">
@@ -38,29 +38,32 @@
       <div v-for="(departmentParent,index) in departments" v-if="index == departments.length-1" :key="index">
         <transition enter-active-class="animated slideInRight">
           <template v-if="departmentMap[departmentParent.id]!=undefined">
-            <van-pull-refresh v-model="isLoading" @refresh="onRefresh(departmentParent.id)">
-              <van-checkbox-group v-model="result">
+            <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
+              <!-- <van-checkbox-group v-model="result.departmentList">
                 <van-cell-group>
-                  <!-- {{departmentParent.id}}
-                  {{getDepartmentList(departmentParent.id)}} -->
                   <van-cell @click="clickDepartment(department)" :title="department.name" :key="i" v-for="(department,i) in departmentMap[departmentParent.id].departmentData.list" is-link >
                     <template slot="icon">
                       <van-checkbox class="em_checkbox" :name="department"/>
                     </template>
                   </van-cell>
                 </van-cell-group>
-              </van-checkbox-group>
-              <div class="block__title">联系人</div>
-              <van-checkbox-group v-model="result">
-                <van-cell-group>
-                  <van-cell class="cell_department_employee" :title="employee.name" :label="employee.title" v-for="(employee,i) in departmentMap[departmentParent.id].employeeData.list" :key="i">
-                    <template slot="icon">
-                      <van-checkbox class="em_checkbox" :name="employee"/>
-                      <avatar :src="employee.portrait" :name="employee.name" size="30px" font-size="12px" style="margin-right: 10px;"/>
-                    </template>
-                  </van-cell>
-                </van-cell-group>
-              </van-checkbox-group>
+              </van-checkbox-group> -->
+              <div v-for="(departmentItem, i) in departmentMap[departmentParent.id].sections" :key="i">
+                <div class="block__title" v-if="departmentItem.groupTitle">{{ departmentItem.groupTitle }}</div>
+                <van-checkbox-group v-model="result[departmentItem.groupType]">
+                  <van-cell-group >
+                    <van-cell
+                      :is-link="departmentItem.groupType == 'dep'"
+                      @click="clickDepartment(item, departmentItem.groupType)" class="cell_department_employee" :title="item.title" :label="item.subTitle" v-for="(item,i) in departmentItem.groupDatas"
+                      :key="i">
+                      <template slot="icon">
+                        <van-checkbox key-name="identity" class="em_checkbox" :name="item"/>
+                        <avatar :name="item.iconName.name" size="30px" font-size="12px" style="margin-right: 10px;"/>
+                      </template>
+                    </van-cell>
+                  </van-cell-group>
+                </van-checkbox-group>
+              </div>
             </van-pull-refresh>
           </template>
         </transition>
@@ -79,23 +82,493 @@ import PullRefresh from '../pull-refresh';
 import Checkbox from '../checkbox';
 import CheckboxGroup from '../checkbox-group';
 import VueBetterScroll from 'vue2-better-scroll';
-
+// import axios from 'axios';
+var mockData = {
+  'optBtns': [
+    {
+      'action': 'web_view',
+      'actionData': '',
+      'url': '',
+      'urlParams': ''
+    }
+  ],
+  'search': {
+    'show': true,
+    'url': '/app/chooser/search.htm',
+    'accessory': '按姓名或手机',
+    'params': 'key'
+  },
+  'accessory': '1000人',
+  'sections': [
+    {
+      'groupTitle': '',
+      'groupType': 'dep',
+      'groupDatas': [
+        {
+          'icon': 'http://',
+          'iconName': {
+            'name:': '喔趣',
+            'color': '#f09039'
+          },
+          'title': '族最议取期',
+          'subTitle': '速心将立太',
+          'clickable': true,
+          'action': 'activity',
+          'actionData': {
+            'subType': 'CONTACTS',
+            'data': {
+              'url': '/app/chooser/books.htm',
+              'urlParams': {
+                'did': '320000199202156560',
+                'usage': 'attend_mode_setting',
+                'modes': []
+              }
+            }
+          },
+          'accessory': '100',
+          'accessoryType': 'arrow',
+          'identity': '810000198808309463',
+          'data': {
+            'id': '430000200309053407',
+            'type': 'dep'
+          }
+        },
+        {
+          'icon': 'http://',
+          'iconName': {
+            'name:': '喔趣',
+            'color': '#f09039'
+          },
+          'title': '至高都取话',
+          'subTitle': '斗容院为个',
+          'clickable': true,
+          'action': 'activity',
+          'actionData': {
+            'subType': 'CONTACTS',
+            'data': {
+              'url': '/app/chooser/books.htm',
+              'urlParams': {
+                'did': '310000201004093034',
+                'usage': 'attend_mode_setting',
+                'modes': []
+              }
+            }
+          },
+          'accessory': '100',
+          'accessoryType': 'arrow',
+          'identity': '150000201105041276',
+          'data': {
+            'id': '410000201711250266',
+            'type': 'dep'
+          }
+        },
+        {
+          'icon': 'http://',
+          'iconName': {
+            'name:': '喔趣',
+            'color': '#f09039'
+          },
+          'title': '起意位却易',
+          'subTitle': '确龙间团据',
+          'clickable': true,
+          'action': 'activity',
+          'actionData': {
+            'subType': 'CONTACTS',
+            'data': {
+              'url': '/app/chooser/books.htm',
+              'urlParams': {
+                'did': '150000199503279669',
+                'usage': 'attend_mode_setting',
+                'modes': []
+              }
+            }
+          },
+          'accessory': '100',
+          'accessoryType': 'arrow',
+          'identity': '43000019950618163X',
+          'data': {
+            'id': '430000197201113311',
+            'type': 'dep'
+          }
+        },
+        {
+          'icon': 'http://',
+          'iconName': {
+            'name:': '喔趣',
+            'color': '#f09039'
+          },
+          'title': '联队感也酸',
+          'subTitle': '织影计达技',
+          'clickable': true,
+          'action': 'activity',
+          'actionData': {
+            'subType': 'CONTACTS',
+            'data': {
+              'url': '/app/chooser/books.htm',
+              'urlParams': {
+                'did': '990000197912163496',
+                'usage': 'attend_mode_setting',
+                'modes': []
+              }
+            }
+          },
+          'accessory': '100',
+          'accessoryType': 'arrow',
+          'identity': '820000198108079435',
+          'data': {
+            'id': '150000199009241083',
+            'type': 'dep'
+          }
+        },
+        {
+          'icon': 'http://',
+          'iconName': {
+            'name:': '喔趣',
+            'color': '#f09039'
+          },
+          'title': '指毛第往场',
+          'subTitle': '由清开器证',
+          'clickable': true,
+          'action': 'activity',
+          'actionData': {
+            'subType': 'CONTACTS',
+            'data': {
+              'url': '/app/chooser/books.htm',
+              'urlParams': {
+                'did': '420000200101232447',
+                'usage': 'attend_mode_setting',
+                'modes': []
+              }
+            }
+          },
+          'accessory': '100',
+          'accessoryType': 'arrow',
+          'identity': '430000197611030287',
+          'data': {
+            'id': '530000198110051555',
+            'type': 'dep'
+          }
+        },
+        {
+          'icon': 'http://',
+          'iconName': {
+            'name:': '喔趣',
+            'color': '#f09039'
+          },
+          'title': '专导派易任',
+          'subTitle': '通由结子你',
+          'clickable': true,
+          'action': 'activity',
+          'actionData': {
+            'subType': 'CONTACTS',
+            'data': {
+              'url': '/app/chooser/books.htm',
+              'urlParams': {
+                'did': '360000200811262281',
+                'usage': 'attend_mode_setting',
+                'modes': []
+              }
+            }
+          },
+          'accessory': '100',
+          'accessoryType': 'arrow',
+          'identity': '530000197009176455',
+          'data': {
+            'id': '530000200005044062',
+            'type': 'dep'
+          }
+        },
+        {
+          'icon': 'http://',
+          'iconName': {
+            'name:': '喔趣',
+            'color': '#f09039'
+          },
+          'title': '层铁重次回',
+          'subTitle': '验安信离交',
+          'clickable': true,
+          'action': 'activity',
+          'actionData': {
+            'subType': 'CONTACTS',
+            'data': {
+              'url': '/app/chooser/books.htm',
+              'urlParams': {
+                'did': '120000199208157401',
+                'usage': 'attend_mode_setting',
+                'modes': []
+              }
+            }
+          },
+          'accessory': '100',
+          'accessoryType': 'arrow',
+          'identity': '340000197306203688',
+          'data': {
+            'id': '610000198012199337',
+            'type': 'dep'
+          }
+        }
+      ]
+    },
+    {
+      'groupTitle': '联系人',
+      'groupType': 'emp',
+      'groupDatas': [
+        {
+          'icon': 'http://',
+          'iconName': {
+            'name:': '喔趣',
+            'color': '#f09039'
+          },
+          'title': '身京有她门',
+          'subTitle': '门走理毛了',
+          'clickable': true,
+          'action': 'activity',
+          'actionData': {
+            'subType': 'CONTACTS',
+            'data': {
+              'url': '/app/chooser/books.htm',
+              'urlParams': {
+                'did': '990000199104251892',
+                'usage': 'attend_mode_setting',
+                'modes': []
+              }
+            }
+          },
+          'accessory': '100',
+          'accessoryType': 'arrow',
+          'identity': '640000199210055553',
+          'data': {
+            'id': '370000200508133577',
+            'type': 'dep'
+          }
+        },
+        {
+          'icon': 'http://',
+          'iconName': {
+            'name:': '喔趣',
+            'color': '#f09039'
+          },
+          'title': '许听近起名',
+          'subTitle': '半些比土用',
+          'clickable': true,
+          'action': 'activity',
+          'actionData': {
+            'subType': 'CONTACTS',
+            'data': {
+              'url': '/app/chooser/books.htm',
+              'urlParams': {
+                'did': '340000198409106033',
+                'usage': 'attend_mode_setting',
+                'modes': []
+              }
+            }
+          },
+          'accessory': '100',
+          'accessoryType': 'arrow',
+          'identity': '320000197406025344',
+          'data': {
+            'id': '320000199304303808',
+            'type': 'dep'
+          }
+        },
+        {
+          'icon': 'http://',
+          'iconName': {
+            'name:': '喔趣',
+            'color': '#f09039'
+          },
+          'title': '面连斗张治',
+          'subTitle': '交联张进南',
+          'clickable': true,
+          'action': 'activity',
+          'actionData': {
+            'subType': 'CONTACTS',
+            'data': {
+              'url': '/app/chooser/books.htm',
+              'urlParams': {
+                'did': '640000199201145864',
+                'usage': 'attend_mode_setting',
+                'modes': []
+              }
+            }
+          },
+          'accessory': '100',
+          'accessoryType': 'arrow',
+          'identity': '150000199305085951',
+          'data': {
+            'id': '460000201307243135',
+            'type': 'dep'
+          }
+        },
+        {
+          'icon': 'http://',
+          'iconName': {
+            'name:': '喔趣',
+            'color': '#f09039'
+          },
+          'title': '意给用体白',
+          'subTitle': '难美局备候',
+          'clickable': true,
+          'action': 'activity',
+          'actionData': {
+            'subType': 'CONTACTS',
+            'data': {
+              'url': '/app/chooser/books.htm',
+              'urlParams': {
+                'did': '130000197807291437',
+                'usage': 'attend_mode_setting',
+                'modes': []
+              }
+            }
+          },
+          'accessory': '100',
+          'accessoryType': 'arrow',
+          'identity': '120000198109102654',
+          'data': {
+            'id': '410000199403246919',
+            'type': 'dep'
+          }
+        },
+        {
+          'icon': 'http://',
+          'iconName': {
+            'name:': '喔趣',
+            'color': '#f09039'
+          },
+          'title': '商办等化意',
+          'subTitle': '着格张见类',
+          'clickable': true,
+          'action': 'activity',
+          'actionData': {
+            'subType': 'CONTACTS',
+            'data': {
+              'url': '/app/chooser/books.htm',
+              'urlParams': {
+                'did': '540000197902261769',
+                'usage': 'attend_mode_setting',
+                'modes': []
+              }
+            }
+          },
+          'accessory': '100',
+          'accessoryType': 'arrow',
+          'identity': '310000200910281497',
+          'data': {
+            'id': '350000200402258159',
+            'type': 'dep'
+          }
+        },
+        {
+          'icon': 'http://',
+          'iconName': {
+            'name:': '喔趣',
+            'color': '#f09039'
+          },
+          'title': '力复大究后',
+          'subTitle': '千特用较率',
+          'clickable': true,
+          'action': 'activity',
+          'actionData': {
+            'subType': 'CONTACTS',
+            'data': {
+              'url': '/app/chooser/books.htm',
+              'urlParams': {
+                'did': '460000197003223144',
+                'usage': 'attend_mode_setting',
+                'modes': []
+              }
+            }
+          },
+          'accessory': '100',
+          'accessoryType': 'arrow',
+          'identity': '150000197004155726',
+          'data': {
+            'id': '530000200001234774',
+            'type': 'dep'
+          }
+        },
+        {
+          'icon': 'http://',
+          'iconName': {
+            'name:': '喔趣',
+            'color': '#f09039'
+          },
+          'title': '话历学员证',
+          'subTitle': '走行角组拉',
+          'clickable': true,
+          'action': 'activity',
+          'actionData': {
+            'subType': 'CONTACTS',
+            'data': {
+              'url': '/app/chooser/books.htm',
+              'urlParams': {
+                'did': '450000200508062377',
+                'usage': 'attend_mode_setting',
+                'modes': []
+              }
+            }
+          },
+          'accessory': '100',
+          'accessoryType': 'arrow',
+          'identity': '310000198804204631',
+          'data': {
+            'id': '650000197608213171',
+            'type': 'dep'
+          }
+        },
+        {
+          'icon': 'http://',
+          'iconName': {
+            'name:': '喔趣',
+            'color': '#f09039'
+          },
+          'title': '矿想家群术',
+          'subTitle': '向火线石实',
+          'clickable': true,
+          'action': 'activity',
+          'actionData': {
+            'subType': 'CONTACTS',
+            'data': {
+              'url': '/app/chooser/books.htm',
+              'urlParams': {
+                'did': '810000198308312324',
+                'usage': 'attend_mode_setting',
+                'modes': []
+              }
+            }
+          },
+          'accessory': '100',
+          'accessoryType': 'arrow',
+          'identity': '110000200511241749',
+          'data': {
+            'id': '620000198108018184',
+            'type': 'dep'
+          }
+        }
+      ]
+    }
+  ]
+};
 export default create({
   name: 'employee-field',
   components: {
     Crumb, CrumbItem, VanCheckboxGroup: CheckboxGroup, VanCheckbox: Checkbox, VanPullRefresh: PullRefresh, Avatar, VueBetterScroll, VanSearch: Search
   },
   props: {
-    departmentRequest: {
-      type: Function,
-      required: true
-    },
-    employeeRequest: {
+    // departmentRequest: {
+    //   type: Function,
+    //   required: true
+    // },
+    // employeeRequest: {
+    //   type: Function,
+    //   required: true
+    // },
+    ajaxRequest: {
       type: Function,
       required: true
     },
     value: {
-      type: Array,
+      type: Object,
       default: []
     },
     companyName: {
@@ -108,8 +581,11 @@ export default create({
     }
   },
   watch: {
-    result() {
-      this.$emit('input', this.result);
+    result: {
+      handler() {
+        this.$emit('input', this.result);
+      },
+      deep: true
     }
   },
   data() {
@@ -124,20 +600,27 @@ export default create({
       departments: [],
       departmentMap: {
       },
-      isLoading: false
+      isLoading: false,
+      searchShow: false,
+      currentRequest: {}
     };
   },
   mounted() {
     // 第一次进去初始化部门列表
-    const id = this.companyId;
+    const did = this.companyId;
     this.departments.push({
-      id: id,
-      name: this.companyName
+      id: did,
+      name: this.companyName,
+      paramsData: {
+        urlParams: {
+          did
+        }
+      }
     });
     // window.setTimeout(() => {
     //   this.$refs.crumb.initScroll();
     // }, 500);
-    this.initDepartmentMap(id);
+    this.initDepartmentMap({ urlParams: { did }});
     // this.departmentRequest({ id: id, currentPage: 1 }).then((data) => {
     //   this.$set(this.departmentMap, id, data);
     //   this.employeeRequest({ departmentId: id }).then(() => {
@@ -145,26 +628,38 @@ export default create({
     //   });
     // });
     // 绑定搜索框监听
-    this.bindSearchChange();
+    // this.bindSearchChange();
   },
   methods: {
     // 部门下拉刷新
-    onRefresh(id) {
-      this.initDepartmentMap(id).then(() => {
+    onRefresh() {
+      this.initDepartmentMap(this.departments[this.departments.length - 1].paramsData).then(() => {
         this.isLoading = false;
       });
     },
-    initDepartmentMap(id) {
-      return new Promise((resolve, reject) => {
-        Promise.all([this.departmentRequest({ id: id }), this.employeeRequest({ departmentId: id })])
-          .then(([departmentData, employeeData]) => {
-            this.$set(this.departmentMap, id, {
-              departmentData,
-              employeeData
-            });
-            resolve();
-          });
-      });
+    initDepartmentMap({ url, urlParams } = {}) {
+      console.log('initDepartmentMap');
+      debugger;
+      this.currentRequest = { url, urlParams };
+      // window.setTimeout(() => {
+      this.$set(this.departmentMap, urlParams.did, mockData);
+      this.searchShow = mockData.search.show;
+      // }, 50);
+      // this.ajaxRequest({ url, urlParams }).then((data) => {
+      //   console.log(urlParams, data, 2);
+      //   this.$set(this.departmentMap, urlParams.did, data);
+      //   this.searchShow = data.search.show;
+      //   resolve(data);
+      // });
+
+      // Promise.all([this.departmentRequest({ id: id }), this.employeeRequest({ departmentId: id })])
+      //   .then(([departmentData, employeeData]) => {
+      //     this.$set(this.departmentMap, id, {
+      //       departmentData,
+      //       employeeData
+      //     });
+      //     resolve();
+      //   });
     },
     backDep(index) {
       console.log(12);
@@ -177,15 +672,19 @@ export default create({
       //   this.$refs.crumb.initScroll();
       // }, 500);
     },
-    clickDepartment({ id, name }) {
-      this.departments.push({
-        id,
-        name
-      });
+    clickDepartment(data, groupType) {
+      if (groupType === 'dep') {
+        const { title, actionData } = data;
+        this.departments.push({
+          id: actionData.data.urlParams.did,
+          name: title,
+          paramsData: actionData.data
+        });
+        this.initDepartmentMap(actionData.data);
+      }
       // this.departmentRequest({ id: id, currentPage: 1 }).then((data) => {
       //   this.$set(this.departmentMap, id, data);
       // });
-      this.initDepartmentMap(id);
       // window.setTimeout(() => {
       //   this.$refs.crumb.initScroll();
       // }, 500);
@@ -193,6 +692,9 @@ export default create({
     //
     // 绑定搜索框输入监听时间，对中文输入法进行优化
     bindSearchChange() {
+      if (!this.$refs.search) {
+        return;
+      }
       const input = this.$refs.search.$el.querySelector('input');
       let cpLock = false;
       input.addEventListener('compositionstart', () => {
@@ -208,11 +710,17 @@ export default create({
     },
     // 搜索人员
     searchEmployee() {
+      console.log(1);
       if (this.search) {
-        this.employeeRequest({ search: this.search }).then(({ list, currentPage, total, pageSize }) => {
-          this.searchEmployeesData.list = list;
-          this.searchEmployeesData.currentPage = currentPage;
+        this.ajaxRequest({ key: this.search }).then(({ sections }) => {
+          this.searchEmployeesData.list = sections;
+          // this.$set(this.departmentMap, urlParams.did, data);
+          // this.searchShow = data.search.show;
         });
+        // this.employeeRequest({ search: this.search }).then(({ list, currentPage, total, pageSize }) => {
+        //   this.searchEmployeesData.list = list;
+        //   this.searchEmployeesData.currentPage = currentPage;
+        // });
       } else {
         this.clearSearch();
       }

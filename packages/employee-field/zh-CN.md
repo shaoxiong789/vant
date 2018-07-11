@@ -80,6 +80,7 @@ export default {
 
 | 参数 | 说明 | 类型 | 默认值 |
 |-----------|-----------|-----------|-------------|-------------|
+| value | 当前选中的人员或部门 | `Object` | 0 |
 | company-id | 首次调用所使用的企业ID | `String` | 0 |
 | company-name | 初始化的公司名称 | `String` | 全公司 |
 | department-request | 请求部门的钩子，必须返回promise | `Function` | - |

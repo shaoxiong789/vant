@@ -32,7 +32,7 @@ export default create({
         this.$nextTick(() => {
           new BScroll(this.$el, {
             scrollX: true,
-            // click: true,
+            click: true,
             startX: this.$el.offsetWidth - width > 0 ? 0 : this.$el.offsetWidth - width
           });
         });
