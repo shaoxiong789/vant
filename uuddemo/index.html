@@ -61,7 +61,8 @@ Vue.use(vant);
             if( typeof method === 'function' ) {
               method(result)
             }
-          }
+          },
+
         },
         template: `
           <div>
@@ -83,7 +84,8 @@ Vue.use(vant);
     },
     hide: function(){
       app.close();
-    }
+    },
+
   }
   $.fn.employeeField = function(method) {
     // Method calling logic
