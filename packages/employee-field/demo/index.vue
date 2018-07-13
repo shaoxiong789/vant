@@ -2,6 +2,7 @@
   <demo-section>
     <demo-block :title="$t('basicUsage')">
       <van-employee-field
+        style="height: 400px;"
         company-id="0" company-name="喔趣信息科技" v-model="result" :ajax-request="ajaxRequest"/>
     </demo-block>
   </demo-section>

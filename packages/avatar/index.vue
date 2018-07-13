@@ -109,11 +109,3 @@ export default create({
   }
 });
 </script>
-<style>
-@import '../vant-css/src/common/var.css';
-.van-avatar{
-  border-radius : 50px;
-  text-align: center;
-  color: #fff;
-}
-</style>

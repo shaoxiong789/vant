@@ -15,15 +15,3 @@ export default create({
   }
 });
 </script>
-<style>
-.van-crumb-item{
-  float: left;
-  color: #3c99d8;
-}
-.van-crumb-item:after{
-  content: '>';
-  color: #ccc;
-  line-height: 1.8;
-  padding: 0 10px;
-}
-</style>

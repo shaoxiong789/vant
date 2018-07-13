@@ -41,22 +41,3 @@ export default create({
   }
 });
 </script>
-<style>
-.van-crumb{
-  line-height: 1.8;
-  font-size: 14px;
-  overflow: hidden;
-}
-.van-crumb ul{
-  white-space:nowrap;
-  overflow: hidden;
-}
-</style>
-<style>
-.van-crumb-item:last-child{
-  color: #999 !important;
-}
-.van-crumb-item:last-child:after{
-  display: none;
-}
-</style>
