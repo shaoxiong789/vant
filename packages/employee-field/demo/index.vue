@@ -28,10 +28,10 @@ export default {
         //   resolve(data);
         // }, 50);
         // console.log(1, data);
-        axios.get('http://rap2api.taobao.org/app/mock/18224//app/chooser/books2.htm', {
+        axios.get('http://rap2api.taobao.org/app/mock/18224/app/chooser/members.htm', {
 
         }).then(({ data }) => {
-          resolve(data.data);
+          resolve(data);
         });
       });
     }

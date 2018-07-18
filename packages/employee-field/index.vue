@@ -35,6 +35,7 @@
             <template v-if="departmentMap[departmentParent.id]!=undefined">
               <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
                 <div v-for="(departmentItem, i) in departmentMap[departmentParent.id].sections" :key="i">
+
                   <div class="block__title" v-if="departmentItem.groupTitle">{{ departmentItem.groupTitle }}</div>
                   <van-checkbox-group v-model="result[departmentItem.groupType]">
                     <van-cell-group >
