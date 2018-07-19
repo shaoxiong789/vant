@@ -2,8 +2,8 @@
   <div class="wq_employee_field">
     <div class="employee_field_wrapper">
       <van-search
-        v-if="searchShow"
-        ref="search" placeholder="找人" v-model="search" :show-action='showAction'
+        v-if="searchData.search.show"
+        ref="search" :placeholder="searchData.search.accessory" v-model="search" :show-action='showAction'
         @focus="onFocus" @cancel="onCancel">
         <template slot="action">
           <div :style="search.trim().length>0?'':'color: rgba(59, 155, 248, 0.36)'" style="padding: 0 10px;" @click="searchEmployee">确定</div>
@@ -135,6 +135,17 @@ export default create({
       return Object.keys(this.result).reduce((count, key) => {
         return count + this.result[key].length;
       }, 0);
+    },
+    searchData() {
+      if (this.departments.length > 0) {
+        return this.departmentMap[this.departments[(this.departments.length - 1)].id];
+      } else {
+        return {
+          search: {
+            show: false
+          }
+        };
+      }
     }
   },
   data() {
@@ -259,7 +270,7 @@ export default create({
     searchEmployee() {
       console.log(1);
       if (this.search) {
-        this.ajaxRequest({ key: this.search }).then(({ sections }) => {
+        this.ajaxRequest({ url: this.searchData.search.url, urlParams: this.searchData.search.urlParams, key: this.search }).then(({ sections }) => {
           this.searchEmployeesData.list = sections;
           // this.$set(this.departmentMap, urlParams.did, data);
           // this.searchShow = data.search.show;
