@@ -11,10 +11,10 @@
         </template>
       </van-search>
       <div v-if="showAction" class="search_list">
-        <div v-if="searchEmployeesData.list.length>0">
-          <van-checkbox-group v-model="result[group.groupType]" v-for="(group, index) in searchEmployeesData.list" :key="index">
+        <div v-if="searchEmployeesData.list">
+          <van-checkbox-group v-model="result[searchEmployeesData.list.groupType]">
             <van-cell-group>
-              <van-cell :title="employee.title" :label="employee.subTitle" class="employee_cell" v-for="(employee,index) in group.groupDatas" :key="index">
+              <van-cell :title="employee.title" :label="employee.subTitle" class="employee_cell" v-for="(employee,index) in searchEmployeesData.list.groupDatas" :key="index">
                 <template slot="icon">
                   <van-checkbox key-name="identity" class="em_checkbox" :name="employee"/>
                   <avatar :src="employee.icon" :name="employee.iconName.name" size="30px" font-size="12px" style="margin-right: 10px;"/>
@@ -234,11 +234,11 @@ export default create({
       if (groupType === 'dep') {
         const { title, actionData } = data;
         this.departments.push({
-          id: actionData.data.urlParams.did,
+          id: this.toJson(actionData).data.urlParams.did,
           name: title,
-          paramsData: actionData.data
+          paramsData: this.toJson(actionData).data
         });
-        this.initDepartmentMap(actionData.data);
+        this.initDepartmentMap(this.toJson(actionData).data);
       }
       // this.departmentRequest({ id: id, currentPage: 1 }).then((data) => {
       //   this.$set(this.departmentMap, id, data);
@@ -321,6 +321,12 @@ export default create({
     // 人员选择完成
     onFinish() {
       this.$emit('finish', this.result);
+    },
+    toJson(val) {
+      if (typeof val === 'string') {
+        return JSON.parse(val);
+      }
+      return val;
     }
   }
 });
