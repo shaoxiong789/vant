@@ -2,7 +2,7 @@
   <div class="wq_employee_field">
     <div class="employee_field_wrapper">
       <van-search
-        v-if="searchData.search.show"
+        v-if="searchData && searchData.search.show"
         ref="search" :placeholder="searchData.search.accessory" v-model="search" :show-action='showAction'
         @focus="onFocus" @cancel="onCancel">
         <template slot="action">
@@ -12,11 +12,11 @@
       </van-search>
       <div v-if="showAction" class="search_list">
         <div v-if="searchEmployeesData.list">
-          <van-checkbox-group v-model="result[searchEmployeesData.list.groupType]">
+          <van-checkbox-group :max="radio?1:0" v-model="result[searchEmployeesData.list.groupType]">
             <van-cell-group>
               <van-cell :title="employee.title" :label="employee.subTitle" class="employee_cell" v-for="(employee,index) in searchEmployeesData.list.groupDatas" :key="index">
                 <template slot="icon">
-                  <van-checkbox key-name="identity" class="em_checkbox" :name="employee"/>
+                  <van-checkbox v-if="type.indexOf(searchEmployeesData.list.groupType)!=-1" key-name="identity" class="em_checkbox" :name="employee"/>
                   <avatar :src="employee.icon" :name="employee.iconName.name" size="30px" font-size="12px" style="margin-right: 10px;"/>
                 </template>
               </van-cell>
@@ -37,14 +37,14 @@
                 <div v-for="(departmentItem, i) in departmentMap[departmentParent.id].sections" :key="i">
 
                   <div class="block__title" v-if="departmentItem.groupTitle">{{ departmentItem.groupTitle }}</div>
-                  <van-checkbox-group v-model="result[departmentItem.groupType]">
+                  <van-checkbox-group :max="radio?1:0" v-model="result[departmentItem.groupType]">
                     <van-cell-group >
                       <van-cell
                         :is-link="departmentItem.groupType == 'dep'"
                         @click="clickDepartment(item, departmentItem.groupType)" class="cell_department_employee" :title="item.title" :label="item.subTitle" v-for="(item,i) in departmentItem.groupDatas"
                         :key="i">
                         <template slot="icon">
-                          <van-checkbox key-name="identity" class="em_checkbox" :name="item"/>
+                          <van-checkbox v-if="type.indexOf(departmentItem.groupType)!=-1" key-name="identity" class="em_checkbox" :name="item"/>
                           <avatar :src="item.icon" :name="item.iconName.name" size="30px" font-size="12px" style="margin-right: 10px;"/>
                         </template>
                       </van-cell>
@@ -88,13 +88,18 @@ import Avatar from '../avatar';
 import Search from '../search';
 import PullRefresh from '../pull-refresh';
 import Checkbox from '../checkbox';
+import Row from '../row';
+import Col from '../col';
+import Cell from '../cell';
+import Icon from '../icon';
+import CellGroup from '../cell-group';
 import CheckboxGroup from '../checkbox-group';
 import VueBetterScroll from 'vue2-better-scroll';
 // import axios from 'axios';
 export default create({
   name: 'employee-field',
   components: {
-    Crumb, CrumbItem, VanCheckboxGroup: CheckboxGroup, VanCheckbox: Checkbox, VanPullRefresh: PullRefresh, Avatar, VueBetterScroll, VanSearch: Search
+    VanIcon: Icon, VanCell: Cell, VanCellGroup: CellGroup, VanCol: Col, VanRow: Row, Crumb, CrumbItem, VanCheckboxGroup: CheckboxGroup, VanCheckbox: Checkbox, VanPullRefresh: PullRefresh, Avatar, VueBetterScroll, VanSearch: Search
   },
   props: {
     // departmentRequest: {
@@ -105,6 +110,15 @@ export default create({
     //   type: Function,
     //   required: true
     // },
+    type: {
+      type: String,
+      required: false,
+      default: 'dep,emp'
+    },
+    radio: {
+      type: Boolean,
+      required: false
+    },
     ajaxRequest: {
       type: Function,
       required: true
