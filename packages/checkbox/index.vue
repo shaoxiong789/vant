@@ -44,7 +44,7 @@ export default create({
     checked: {
       get() {
         return this.parent
-          ? this.parent.value.findIndex((element) => {
+          ? (this.parent.value ? this.parent.value : []).findIndex((element) => {
             if (this.keyName) {
               return element[this.keyName] === this.name[this.keyName];
             }
@@ -56,7 +56,7 @@ export default create({
       set(val) {
         const { parent } = this;
         if (parent) {
-          const parentValue = this.parent.value.slice();
+          const parentValue = this.parent.value ? this.parent.value : [].slice();
           if (val) {
             if (parent.max && parentValue.length >= parent.max) {
               return;

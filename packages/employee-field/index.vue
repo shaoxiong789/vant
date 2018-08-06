@@ -12,7 +12,7 @@
       </van-search>
       <div v-if="showAction" class="search_list">
         <div v-if="searchEmployeesData.list">
-          <van-checkbox-group :max="radio?1:0" v-model="result[searchEmployeesData.list.groupType]">
+          <van-checkbox-group v-if="!radio" v-model="result[searchEmployeesData.list.groupType]">
             <van-cell-group>
               <van-cell :title="employee.title" :label="employee.subTitle" class="employee_cell" v-for="(employee,index) in searchEmployeesData.list.groupDatas" :key="index">
                 <template slot="icon">
@@ -22,6 +22,16 @@
               </van-cell>
             </van-cell-group>
           </van-checkbox-group>
+          <van-radio-group v-else v-model="result[searchEmployeesData.list.groupType]">
+            <van-cell-group>
+              <van-cell :title="employee.title" :label="employee.subTitle" class="employee_cell" v-for="(employee,index) in searchEmployeesData.list.groupDatas" :key="index">
+                <template slot="icon">
+                  <van-radio v-if="type.indexOf(searchEmployeesData.list.groupType)!=-1" key-name="identity" class="em_checkbox" :name="employee"/>
+                  <avatar :src="employee.icon" :name="employee.iconName.name" size="30px" font-size="12px" style="margin-right: 10px;"/>
+                </template>
+              </van-cell>
+            </van-cell-group>
+          </van-radio-group>
         </div>
       </div>
       <div class="branch_list" v-else>
@@ -37,7 +47,7 @@
                 <div v-for="(departmentItem, i) in departmentMap[departmentParent.id].sections" :key="i">
 
                   <div class="block__title" v-if="departmentItem.groupTitle">{{ departmentItem.groupTitle }}</div>
-                  <van-checkbox-group :max="radio?1:0" v-model="result[departmentItem.groupType]">
+                  <van-checkbox-group v-if="!radio" v-model="result[departmentItem.groupType]">
                     <van-cell-group >
                       <van-cell
                         :is-link="departmentItem.groupType == 'dep'"
@@ -50,6 +60,20 @@
                       </van-cell>
                     </van-cell-group>
                   </van-checkbox-group>
+
+                  <van-radio-group v-else v-model="result[departmentItem.groupType]">
+                    <van-cell-group >
+                      <van-cell
+                        :is-link="departmentItem.groupType == 'dep'"
+                        @click="clickDepartment(item, departmentItem.groupType)" class="cell_department_employee" :title="item.title" :label="item.subTitle" v-for="(item,i) in departmentItem.groupDatas"
+                        :key="i">
+                        <template slot="icon">
+                          <van-radio v-if="type.indexOf(departmentItem.groupType)!=-1" key-name="identity" class="em_checkbox" :name="item"/>
+                          <avatar :src="item.icon" :name="item.iconName.name" size="30px" font-size="12px" style="margin-right: 10px;"/>
+                        </template>
+                      </van-cell>
+                    </van-cell-group>
+                  </van-radio-group>
                 </div>
               </van-pull-refresh>
             </template>
@@ -59,9 +83,9 @@
     </div>
     <div class="wq_employee_field_actions">
       <van-row>
-        <van-col span="18" class="action_result">
+        <van-col v-if="!radio" span="18" class="action_result">
           <template v-for="(list) in result">
-            <template v-for="(value, k) in list">
+            <template v-if="list" v-for="(value, k) in list">
               <div :key="k" class="action_result_item">
                 <div class="avatar">
                   <van-icon @click="$delete( list, k )" class="clear" name="clear" color="red"/>
@@ -72,8 +96,19 @@
             </template>
           </template>
         </van-col>
+        <van-col v-else span="18" class="action_result">
+          <template v-for="(value,k) in result">
+            <div :key="k" v-if="value" class="action_result_item">
+              <div class="avatar">
+                <van-icon @click="result[k] = null" class="clear" name="clear" color="red"/>
+                <avatar :src="value.icon" :name="value.iconName.name" size="30px" font-size="12px"/>
+              </div>
+              <div class="title">{{ value.title }}</div>
+            </div>
+          </template>
+        </van-col>
         <van-col span="6" class="action_button">
-          <span @click="onFinish">完成({{ resultCount }})</span>
+          <span @click="onFinish">完成{{ !radio?`(${resultCount})`:'' }}</span>
         </van-col>
       </van-row>
     </div>
@@ -95,11 +130,14 @@ import Icon from '../icon';
 import CellGroup from '../cell-group';
 import CheckboxGroup from '../checkbox-group';
 import VueBetterScroll from 'vue2-better-scroll';
+import RadioGroup from '../radio-group';
+import Radio from '../radio';
+
 // import axios from 'axios';
 export default create({
   name: 'employee-field',
   components: {
-    VanIcon: Icon, VanCell: Cell, VanCellGroup: CellGroup, VanCol: Col, VanRow: Row, Crumb, CrumbItem, VanCheckboxGroup: CheckboxGroup, VanCheckbox: Checkbox, VanPullRefresh: PullRefresh, Avatar, VueBetterScroll, VanSearch: Search
+    VanRadio: Radio, VanRadioGroup: RadioGroup, VanIcon: Icon, VanCell: Cell, VanCellGroup: CellGroup, VanCol: Col, VanRow: Row, Crumb, CrumbItem, VanCheckboxGroup: CheckboxGroup, VanCheckbox: Checkbox, VanPullRefresh: PullRefresh, Avatar, VueBetterScroll, VanSearch: Search
   },
   props: {
     // departmentRequest: {
@@ -147,6 +185,9 @@ export default create({
   computed: {
     resultCount() {
       return Object.keys(this.result).reduce((count, key) => {
+        if (!this.result[key]) {
+          return 0;
+        }
         return count + this.result[key].length;
       }, 0);
     },

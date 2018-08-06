@@ -1,5 +1,5 @@
 <template>
-  <div :class="b({ disabled: isDisabled })" @click="$emit('click')">
+  <div :class="b({ disabled: isDisabled })" @click.stop="$emit('click')">
     <span :class="b('input')">
       <input
         :value="name"
@@ -8,9 +8,9 @@
         :class="b('control')"
         :disabled="isDisabled"
       >
-      <icon :name="currentValue === name ? 'checked' : 'check'" />
+      <icon :name="checked ? 'checked' : 'check'" />
     </span>
-    <span v-if="$slots.default" :class="b('label')" @click="onClickLabel">
+    <span v-if="$slots.default" :class="b('label')" @click.stop="onClickLabel">
       <slot />
     </span>
   </div>
@@ -26,12 +26,22 @@ export default create({
   mixins: [findParent],
 
   props: {
+    keyName: null,
     name: null,
     value: null,
     disabled: Boolean
   },
 
   computed: {
+    checked() {
+      if (!this.currentValue) {
+        return false;
+      }
+      if (this.keyName) {
+        return this.currentValue[this.keyName] === this.name[this.keyName];
+      }
+      return this.currentValue === this.name;
+    },
     currentValue: {
       get() {
         return this.parent ? this.parent.value : this.value;

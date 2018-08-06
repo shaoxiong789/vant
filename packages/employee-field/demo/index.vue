@@ -3,7 +3,7 @@
     <demo-block :title="$t('basicUsage')">
       <van-employee-field
         style="height: 400px;"
-        company-id="0" type="dep,emp" :radio="true" company-name="喔趣信息科技" v-model="result"
+        company-id="0" type="emp" :radio="false" company-name="喔趣信息科技" v-model="result"
         :ajax-request="ajaxRequest"/>
     </demo-block>
   </demo-section>
@@ -15,8 +15,8 @@ export default {
   data() {
     return {
       result: {
-        dep: [],
-        emp: []
+        dep: null,
+        emp: null
       }
     };
   },
