@@ -17,7 +17,9 @@
               <van-cell :title="employee.title" :label="employee.subTitle" class="employee_cell" v-for="(employee,index) in searchEmployeesData.list.groupDatas" :key="index">
                 <template slot="icon">
                   <van-checkbox v-if="type.indexOf(searchEmployeesData.list.groupType)!=-1" key-name="identity" class="em_checkbox" :name="employee"/>
-                  <avatar :src="employee.icon" :name="employee.iconName.name" size="30px" font-size="12px" style="margin-right: 10px;"/>
+                  <avatar
+                    :src="employee.icon" :default-color="employee.iconName.color" :name="employee.iconName.name" size="30px" font-size="12px"
+                    style="margin-right: 10px;"/>
                 </template>
               </van-cell>
             </van-cell-group>
@@ -27,7 +29,9 @@
               <van-cell :title="employee.title" :label="employee.subTitle" class="employee_cell" v-for="(employee,index) in searchEmployeesData.list.groupDatas" :key="index">
                 <template slot="icon">
                   <van-radio v-if="type.indexOf(searchEmployeesData.list.groupType)!=-1" key-name="identity" class="em_checkbox" :name="employee"/>
-                  <avatar :src="employee.icon" :name="employee.iconName.name" size="30px" font-size="12px" style="margin-right: 10px;"/>
+                  <avatar
+                    :src="employee.icon" :default-color="employee.iconName.color" :name="employee.iconName.name" size="30px" font-size="12px"
+                    style="margin-right: 10px;"/>
                 </template>
               </van-cell>
             </van-cell-group>
@@ -55,7 +59,9 @@
                         :key="i">
                         <template slot="icon">
                           <van-checkbox v-if="type.indexOf(departmentItem.groupType)!=-1" key-name="identity" class="em_checkbox" :name="item"/>
-                          <avatar :src="item.icon" :name="item.iconName.name" size="30px" font-size="12px" style="margin-right: 10px;"/>
+                          <avatar
+                            :src="item.icon" :default-color="item.iconName.color" :name="item.iconName.name" size="30px" font-size="12px"
+                            style="margin-right: 10px;"/>
                         </template>
                       </van-cell>
                     </van-cell-group>
@@ -69,7 +75,9 @@
                         :key="i">
                         <template slot="icon">
                           <van-radio v-if="type.indexOf(departmentItem.groupType)!=-1" key-name="identity" class="em_checkbox" :name="item"/>
-                          <avatar :src="item.icon" :name="item.iconName.name" size="30px" font-size="12px" style="margin-right: 10px;"/>
+                          <avatar
+                            :src="item.icon" :default-color="item.iconName.color" :name="item.iconName.name" size="30px" font-size="12px"
+                            style="margin-right: 10px;"/>
                         </template>
                       </van-cell>
                     </van-cell-group>
@@ -89,7 +97,7 @@
               <div :key="k" class="action_result_item">
                 <div class="avatar">
                   <van-icon @click="$delete( list, k )" class="clear" name="clear" color="red"/>
-                  <avatar :src="value.icon" :name="value.iconName.name" size="30px" font-size="12px"/>
+                  <avatar :src="value.icon" :default-color="value.iconName.color" :name="value.iconName.name" size="30px" font-size="12px"/>
                 </div>
                 <div class="title">{{ value.title }}</div>
               </div>
@@ -101,7 +109,7 @@
             <div :key="k" v-if="value" class="action_result_item">
               <div class="avatar">
                 <van-icon @click="result[k] = null" class="clear" name="clear" color="red"/>
-                <avatar :src="value.icon" :name="value.iconName.name" size="30px" font-size="12px"/>
+                <avatar :default-color="value.iconName.color" :src="value.icon" :name="value.iconName.name" size="30px" font-size="12px"/>
               </div>
               <div class="title">{{ value.title }}</div>
             </div>
@@ -150,7 +158,6 @@ export default create({
     // },
     type: {
       type: String,
-      required: false,
       default: 'dep,emp'
     },
     radio: {
@@ -232,6 +239,8 @@ export default create({
         }
       }
     });
+
+    console.log(this.radio);
     // window.setTimeout(() => {
     //   this.$refs.crumb.initScroll();
     // }, 500);
