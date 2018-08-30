@@ -2,7 +2,7 @@
   <demo-section>
     <demo-block :title="$t('basicUsage')">
       <van-employee-field
-        style="height: 400px;"
+        style="height: calc(100vh - 49px - 46px);"
         company-id="0" type="emp" :radio="radio" company-name="喔趣信息科技" v-model="result"
         :ajax-request="ajaxRequest"/>
     </demo-block>
@@ -18,7 +18,7 @@ export default {
         dep: null,
         emp: null
       },
-      radio: true
+      radio: false
     };
   },
   methods: {
