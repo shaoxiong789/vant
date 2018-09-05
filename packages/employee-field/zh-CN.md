@@ -48,7 +48,6 @@ export default {
 | value | 当前选中的人员或部门 | `Object` | 0 |
 | company-id | 首次调用所使用的企业ID | `String` | 0 |
 | company-name | 初始化的公司名称 | `String` | 全公司 |
-| department-request | 请求部门的钩子，必须返回promise | `Function` | - |
-| employee-request | 请求人员的钩子,必须返回promise | `Function` | - |
+| ajaxRequest | 请求部门和人员的钩子，必须返回promise | `Function` | - |
 | type | 选择模式是否支持部门或者人员 | `String` | dev,emp |
 | radio | 是否是单选 | `Boolean` | false |
