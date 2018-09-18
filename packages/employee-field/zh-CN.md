@@ -51,3 +51,9 @@ export default {
 | ajaxRequest | 请求部门和人员的钩子，必须返回promise | `Function` | - |
 | type | 选择模式是否支持部门或者人员 | `String` | dev,emp |
 | radio | 是否是单选 | `Boolean` | false |
+
+### Event
+
+| 事件 | 说明 | 回调参数 |
+|-----------|-----------|-----------|
+| finish | 点击完成按钮时触发 | - |

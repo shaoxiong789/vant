@@ -8,6 +8,8 @@
       size,
       {
         block,
+        plain,
+        square,
         loading,
         disabled,
         unclickable: disabled || loading,
@@ -16,8 +18,8 @@
     ])"
     @click="onClick"
   >
-    <loading v-if="loading" size="20px" :color="type === 'default' ? 'black' : 'white'" />
-    <span :class="b('text')">
+    <loading v-if="loading" size="20px" :color="type === 'default' ? void 0 : ''" />
+    <span v-else :class="b('text')">
       <slot>{{ text }}</slot>
     </span>
   </component>
@@ -32,6 +34,8 @@ export default create({
   props: {
     text: String,
     block: Boolean,
+    plain: Boolean,
+    square: Boolean,
     loading: Boolean,
     disabled: Boolean,
     nativeType: String,

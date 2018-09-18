@@ -117,9 +117,9 @@
             <div :key="k" v-if="value" class="action_result_item">
               <div class="avatar">
                 <van-icon @click="result[k] = null" class="clear" name="clear" color="red"/>
-                <avatar :default-color="value.iconName.color" :src="value.icon" :name="value.iconName.name" size="34px" font-size="12px"/>
+                <avatar :src="value.icon" :default-color="value.iconName.color" :name="value.iconName.name" size="34px" font-size="12px"/>
               </div>
-              <div class="title">{{ value.title }}</div>
+              <div class="action_result_title">{{ value.title }}</div>
             </div>
           </template>
         </van-col>

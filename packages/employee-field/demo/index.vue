@@ -18,7 +18,7 @@ export default {
         dep: null,
         emp: null
       },
-      radio: false
+      radio: true
     };
   },
   methods: {
