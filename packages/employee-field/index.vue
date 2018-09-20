@@ -179,7 +179,10 @@ export default create({
     },
     value: {
       type: Object,
-      default: []
+      default: {
+        dep: {},
+        emp: {}
+      }
     },
     companyName: {
       type: String,

@@ -48,7 +48,10 @@ export default create({
       },
 
       set(val) {
-        (this.parent || this).$emit('input', val);
+        (this.parent || this).$emit('input', null);
+        this.$nextTick(() => {
+          (this.parent || this).$emit('input', val);
+        });
       }
     },
 

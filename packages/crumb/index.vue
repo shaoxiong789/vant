@@ -1,8 +1,8 @@
 <template>
   <div :class="b()">
-    <ul :style="{width: contentWidth+'px'}">
+    <div :style="{width: contentWidth+'px'}">
       <slot/>
-    </ul>
+    </div>
   </div>
 </template>
 <script>
