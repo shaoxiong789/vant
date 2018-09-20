@@ -1,7 +1,7 @@
 <template>
   <div
     :class="b({
-      on: open,
+      on: value,
       disabled
     })"
     :style="style"
@@ -20,18 +20,12 @@ export default create({
   name: 'switch',
 
   props: {
-    value: [Boolean, String],
+    value: Boolean,
     loading: Boolean,
     disabled: Boolean,
     size: {
       type: String,
       default: '30px'
-    },
-    activeValue: {
-      type: String
-    },
-    inactiveValue: {
-      type: String
     }
   },
 
@@ -40,36 +34,14 @@ export default create({
       return {
         fontSize: this.size
       };
-    },
-    open: {
-      get() {
-        if (this.activeValue && this.inactiveValue) {
-          if (this.value === this.activeValue) {
-            return true;
-          }
-          if (this.value === this.inactiveValue) {
-            return false;
-          }
-        }
-        return this.value;
-      },
-      set(value) {
-        let open;
-        if (value) {
-          open = this.activeValue ? this.activeValue : value;
-        } else {
-          open = this.inactiveValue ? this.inactiveValue : value;
-        }
-        this.$emit('input', open);
-        this.$emit('change', open);
-      }
     }
   },
 
   methods: {
     onClick() {
       if (!this.disabled && !this.loading) {
-        this.open = !this.open;
+        this.$emit('input', !this.value);
+        this.$emit('change', !this.value);
       }
     }
   }

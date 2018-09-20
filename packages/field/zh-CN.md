@@ -113,7 +113,7 @@ Vue.use(Field);
 
 ### API
 
-Field 默认支持 Input 标签所有的原生属性，比如 `maxlength`、`placeholder`、`readonly`、`autofocus` 等
+Field 默认支持 Input 标签所有的原生属性，比如 `maxlength`、`placeholder`、`autofocus` 等
 
 | 参数 | 说明 | 类型 | 默认值 |
 |-----------|-----------|-----------|-------------|-------------|
@@ -122,6 +122,7 @@ Field 默认支持 Input 标签所有的原生属性，比如 `maxlength`、`pla
 | type | 可设置为任意原生类型, 如 `number` `tel` `textarea` | `String` | `text` |
 | border | 是否显示内边框 | `Boolean` | `true` |
 | disabled | 是否禁用输入框 | `Boolean` | `false` |
+| readonly | 是否只读 | `Boolean` | `false` |
 | clearable | 是否启用清除控件 | `Boolean` | `false` |
 | required | 是否显示表单必填星号 | `Boolean` | `false` |
 | is-link | 是否展示右侧箭头并开启点击反馈 | `Boolean` | `false` |
@@ -139,7 +140,7 @@ Field 默认支持 Input 标签所有的原生事件，如 `focus`、`blur`、`k
 
 | 事件 | 说明 | 回调参数 |
 |-----------|-----------|-----------|
-| click-icon | 点击尾部图标时触发 | -
+| click-icon | 点击尾部图标时触发 | - |
 
 ### 方法
 
@@ -156,3 +157,35 @@ Field 默认支持 Input 标签所有的原生事件，如 `focus`、`blur`、`k
 | label | 自定义输入框标签 |
 | icon | 自定义输入框尾部图标 |
 | button | 自定义输入框尾部按钮 |
+
+### 更新日志
+
+| 版本 | 类型 | 内容 |
+|-----------|-----------|-----------|
+| 1.2.1 | improvement | 优化清除按钮颜色
+| 1.1.15 | bugfix | 修复 date 类型在 iOS 设备下显示错误的问题
+| 1.1.14 | bugfix | 修复行高错误
+| 1.1.11 | bugfix | 修复 readonly 状态下在 safari 上出现光标的问题
+| 1.1.11 | bugfix | 修复 readonly 状态下仍然会显示清除按钮的问题
+| 1.1.10 | feature | 新增 is-link 属性
+| 1.1.10 | feature | 新增 input-align 属性
+| 1.1.10 | feature | 新增 label-align 属性
+| 1.1.9 | feature | 新增 clearable 属性
+| 1.1.8 | feature | 新增 blur 方法
+| 1.1.8 | improvement | 更新右侧按钮默认颜色
+| 1.1.7 | feature | 支持 v-model.number
+| 1.1.5 | bugfix | 修复在 safari 上不正确的外边距
+| 1.1.4 | feature | 新增 left-icon 属性
+| 1.1.3 | feature | 新增 label 插槽
+| 1.0.8 | bugfix | 修复 number 类型无法输入负数的问题
+| 1.0.3 | feature | 新增 button 插槽，支持插入按钮
+| 1.0.0 | feature | 支持配置 autosize 最大/最小高度
+| 0.12.12 | bugfix | 修复在 safari 下禁用态颜色过浅的问题
+| 0.12.7 | bugfix | 修复 label 多行时样式错误的问题
+| 0.12.0 | feature | 新增 error-message 属性
+| 0.11.11 | feature | 支持 input 标签原生事件
+| 0.11.6 | bugfix | 修复 number 类型输入值过滤
+| 0.11.6 | bugfix | 修复 disabled 在安卓下的显示问题
+| 0.10.0 | bugfix | 修复 type 为 textarea 且 display none 时高度计算错误的问题
+| 0.8.5 | feature | 新增 icon 插槽
+| 0.8.5 | bugfix | 修复 autosize 高度错误的问题

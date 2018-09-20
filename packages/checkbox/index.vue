@@ -1,16 +1,11 @@
 <template>
   <div :class="b()">
-    <icon
-      name="success"
-      :class="[
-        b('icon'),
-        `van-checkbox--${shape}`, {
-          'van-checkbox--disabled': isDisabled,
-          'van-checkbox--checked': checked
-      }]"
-      @click.stop="onClick"
-    />
-    <span v-if="$slots.default" :class="b('label')" @click="onClick('label')">
+    <div :class="[b('icon', [shape, { disabled: isDisabled, checked }])]" @click="toggle">
+      <slot name="icon" :checked="checked">
+        <icon name="success" />
+      </slot>
+    </div>
+    <span v-if="$slots.default" :class="b('label', labelPosition)" @click="toggle('label')">
       <slot />
     </span>
   </div>
@@ -28,8 +23,8 @@ export default create({
   props: {
     name: null,
     value: null,
-    keyName: null,
     disabled: Boolean,
+    labelPosition: String,
     labelDisabled: {
       type: Boolean,
       default: false
@@ -44,40 +39,25 @@ export default create({
     checked: {
       get() {
         return this.parent
-          ? (this.parent.value ? this.parent.value : []).findIndex((element) => {
-            if (this.keyName) {
-              return element[this.keyName] === this.name[this.keyName];
-            }
-            return element === this.name;
-          }) !== -1
+          ? this.parent.value.indexOf(this.name) !== -1
           : this.value;
       },
 
       set(val) {
         const { parent } = this;
         if (parent) {
-          const parentValue = this.parent.value ? this.parent.value : [].slice();
+          const parentValue = this.parent.value.slice();
           if (val) {
             if (parent.max && parentValue.length >= parent.max) {
               return;
             }
             /* istanbul ignore else */
-            if (parentValue.findIndex((element) => {
-              if (this.keyName) {
-                return element[this.keyName] === this.name[this.keyName];
-              }
-              return element === this.name;
-            }) === -1) {
+            if (parentValue.indexOf(this.name) === -1) {
               parentValue.push(this.name);
               parent.$emit('input', parentValue);
             }
           } else {
-            const index = parentValue.findIndex((element) => {
-              if (this.keyName) {
-                return element[this.keyName] === this.name[this.keyName];
-              }
-              return element === this.name;
-            });
+            const index = parentValue.indexOf(this.name);
             /* istanbul ignore else */
             if (index !== -1) {
               parentValue.splice(index, 1);
@@ -106,7 +86,7 @@ export default create({
   },
 
   methods: {
-    onClick(target) {
+    toggle(target) {
       if (!this.isDisabled && !(target === 'label' && this.labelDisabled)) {
         this.checked = !this.checked;
       }

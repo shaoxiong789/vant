@@ -5,6 +5,8 @@ Dialog 组件支持函数调用和组件调用两种形式
 
 ```js
 import { Dialog } from 'vant';
+
+Vue.use(Dialog);
 ```
 
 ### 代码演示
@@ -79,11 +81,11 @@ export default {
 | overlay | 是否展示蒙层 | `Boolean` | `true` |
 | closeOnClickOverlay | 点击蒙层时是否关闭弹窗 | `Boolean` | `false` |
 | lockScroll | 是否锁定背景滚动 | `Boolean` | `true` |
-| beforeClose | 关闭前的回调函数，调用 done 后关闭弹窗 | (action: string, done: function) => void | - |
+| beforeClose | 关闭前的回调函数，<br>调用 done() 后关闭弹窗，<br>调用 done(false) 可以阻止弹窗关闭 | (action: string, done: function) => void | - |
 
 
 #### 高级用法
-如果需要在弹窗内实现更复杂的交互，可以通过组件形式来调用 Dialog
+如果需要在弹窗内实现更复杂的交互，可以通过组件形式来调用 Dialog，调用前需要通过 Vue.use 注册组件
 
 ```html
 <van-dialog
@@ -106,8 +108,6 @@ export default {
 ```
 
 ```js
-Vue.use(Dialog);
-
 export default {
   data() {
     return {
@@ -143,8 +143,8 @@ export default {
 | overlay | 是否展示蒙层 | `Boolean` | `true` |
 | close-on-click-overlay | 点击蒙层时是否关闭弹窗 | `Boolean` | `false` |
 | lock-scroll | 是否锁定背景滚动 | `Boolean` | `true` |
-| before-close | 关闭前的回调函数，调用 done 后关闭弹窗 | (action: string, done: function) => void | - |
-| get-container | 指定弹窗挂载的 HTML 节点 | `() => HTMLElement` | - |
+| before-close | 关闭前的回调函数，<br>调用 done() 后关闭弹窗，<br>调用 done(false) 可以阻止弹窗关闭 | (action: string, done: function) => void | - |
+| get-container | 指定挂载的节点，可以传入 CSS 选择器，<br>或一个返回 DOM 节点的函数 | `String | () => HTMLElement` | - |
 
 ### Event
 
@@ -152,3 +152,22 @@ export default {
 |-----------|-----------|-----------|
 | confirm | 点击确认按钮时触发 | - |
 | cancel | 点击取消按钮时触发 | - |
+
+### 更新日志
+
+| 版本 | 类型 | 内容 |
+|-----------|-----------|-----------|
+| 1.3.2 | improvement | 更新按钮颜色
+| 1.1.8 | feature | 支持单独传入 title 属性
+| 1.1.7 | feature | 支持 className 属性
+| 1.1.7 | improvement | 优化内容为空时的样式
+| 1.1.6 | feature | 新增 get-container 属性
+| 1.1.6 | feature | beforeClose 支持通过回调参数控制关闭动作
+| 1.1.5 | improvement | 优化按钮文字选中状态
+| 1.0.6 | feature | 新增 before-close 属性, 支持异步关闭
+| 1.0.4 | bugfix | 修复未初始化时 close 方法报错的问题
+| 0.12.4 | feature | 新增 setDefaultOptions 方法
+| 0.11.4 | feature | 支持 this.$dialog 调用
+| 0.10.6 | bugfix | 修复按钮文字未重置的问题
+| 0.8.7 | feature | 支持通过组件的方式进行调用
+| 0.8.5 | bugfix | 修复 z-index 错误的问题

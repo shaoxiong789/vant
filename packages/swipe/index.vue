@@ -26,6 +26,7 @@
 <script>
 import create from '../utils/create';
 import Touch from '../mixins/touch';
+import { on, off } from '../utils/event';
 
 export default create({
   name: 'swipe',
@@ -35,6 +36,14 @@ export default create({
   props: {
     autoplay: Number,
     vertical: Boolean,
+    width: {
+      type: Number,
+      default: 0
+    },
+    height: {
+      type: Number,
+      default: 0
+    },
     loop: {
       type: Boolean,
       default: true
@@ -59,8 +68,8 @@ export default create({
 
   data() {
     return {
-      width: 0,
-      height: 0,
+      computedWidth: 0,
+      computedHeight: 0,
       offset: 0,
       active: 0,
       deltaX: 0,
@@ -72,10 +81,18 @@ export default create({
 
   mounted() {
     this.initialize();
+
+    if (!this.$isServer) {
+      on(window, 'resize', this.onResize, true);
+    }
   },
 
   destroyed() {
     this.clear();
+
+    if (!this.$isServer) {
+      off(window, 'resize', this.onResize, true);
+    }
   },
 
   watch: {
@@ -106,7 +123,7 @@ export default create({
     },
 
     size() {
-      return this[this.vertical ? 'height' : 'width'];
+      return this[this.vertical ? 'computedHeight' : 'computedWidth'];
     },
 
     trackSize() {
@@ -128,20 +145,24 @@ export default create({
 
   methods: {
     // initialize swipe position
-    initialize() {
+    initialize(active = this.initialSwipe) {
       clearTimeout(this.timer);
       if (this.$el) {
         const rect = this.$el.getBoundingClientRect();
-        this.width = rect.width;
-        this.height = rect.height;
+        this.computedWidth = this.width || rect.width;
+        this.computedHeight = this.height || rect.height;
       }
       this.swiping = true;
-      this.active = this.initialSwipe;
+      this.active = active;
       this.offset = this.count > 1 ? -this.size * this.active : 0;
       this.swipes.forEach(swipe => {
         swipe.offset = 0;
       });
       this.autoPlay();
+    },
+
+    onResize() {
+      this.initialize(this.activeIndicator);
     },
 
     onTouchStart(event) {
@@ -164,9 +185,8 @@ export default create({
       ) {
         event.preventDefault();
         event.stopPropagation();
+        this.move(0, Math.min(Math.max(this.delta, -this.size), this.size));
       }
-
-      this.move(0, Math.min(Math.max(this.delta, -this.size), this.size));
     },
 
     onTouchEnd() {
@@ -191,20 +211,13 @@ export default create({
         return;
       }
 
-      if (move) {
-        if (active === -1) {
-          swipes[count - 1].offset = 0;
-        }
-        swipes[0].offset = atLast && move > 0 ? trackSize : 0;
+      swipes[0].offset = (atLast && (delta < 0 || move > 0)) ? trackSize : 0;
+      swipes[count - 1].offset = (atFirst && (delta > 0 || move < 0)) ? -trackSize : 0;
 
+      if (move && active + move >= -1 && active + move <= count) {
         this.active += move;
-      } else {
-        if (atFirst) {
-          swipes[count - 1].offset = delta > 0 ? -trackSize : 0;
-        } else if (atLast) {
-          swipes[0].offset = delta < 0 ? trackSize : 0;
-        }
       }
+
       this.offset = offset - this.active * this.size;
     },
 
@@ -237,6 +250,7 @@ export default create({
         this.clear();
         this.timer = setTimeout(() => {
           this.swiping = true;
+          this.resetTouchStatus();
           this.correctPosition();
 
           setTimeout(() => {

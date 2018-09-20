@@ -2,7 +2,6 @@
   <div :class="b()" :style="{ height: mainHeight + 'px' }">
     <div :class="b('nav')">
       <div
-        :key="index"
         v-for="(item, index) in items"
         class="van-ellipsis"
         :class="b('nitem', { active: mainActiveIndex === index })"

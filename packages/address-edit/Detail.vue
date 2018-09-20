@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <cell :class="b()">
     <field
       v-on="$listeners"
-      ref="field"
-      rows="1"
       autosize
+      ref="field"
+      :rows="detailRows"
       :clearable="!isAndroid"
       type="textarea"
       maxlength="200"
@@ -32,7 +32,7 @@
       clickable
       @click="onSelect(express)"
     />
-  </div>
+  </cell>
 </template>
 
 <script>
@@ -51,6 +51,7 @@ export default create({
     value: String,
     error: Boolean,
     focused: Boolean,
+    detailRows: Number,
     searchResult: Array,
     showSearchResult: Boolean
   },
@@ -71,8 +72,8 @@ export default create({
 
   methods: {
     onSelect(express) {
-      this.$emit('input', `${express.address || ''} ${express.name || ''}`.trim());
       this.$emit('select-search', express);
+      this.$emit('input', `${express.address || ''} ${express.name || ''}`.trim());
     }
   }
 });

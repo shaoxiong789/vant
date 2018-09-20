@@ -3,14 +3,12 @@ import Actionsheet from './actionsheet';
 import AddressEdit from './address-edit';
 import AddressList from './address-list';
 import Area from './area';
-import Avatar from './avatar';
 import Badge from './badge';
 import BadgeGroup from './badge-group';
 import Button from './button';
 import Card from './card';
 import Cell from './cell';
 import CellGroup from './cell-group';
-import CellSwipe from './cell-swipe';
 import Checkbox from './checkbox';
 import CheckboxGroup from './checkbox-group';
 import Circle from './circle';
@@ -22,17 +20,15 @@ import ContactEdit from './contact-edit';
 import ContactList from './contact-list';
 import CouponCell from './coupon-cell';
 import CouponList from './coupon-list';
-import Crumb from './crumb';
-import CrumbItem from './crumb-item';
 import DatetimePicker from './datetime-picker';
 import Dialog from './dialog';
-import EmployeeField from './employee-field';
 import Field from './field';
 import GoodsAction from './goods-action';
 import GoodsActionBigBtn from './goods-action-big-btn';
 import GoodsActionMiniBtn from './goods-action-mini-btn';
 import Icon from './icon';
 import ImagePreview from './image-preview';
+import Info from './info';
 import Lazyload from './lazyload';
 import List from './list';
 import Loading from './loading';
@@ -59,6 +55,7 @@ import Stepper from './stepper';
 import Steps from './steps';
 import SubmitBar from './submit-bar';
 import Swipe from './swipe';
+import SwipeCell from './swipe-cell';
 import SwipeItem from './swipe-item';
 import Switch from './switch';
 import SwitchCell from './switch-cell';
@@ -72,20 +69,18 @@ import TreeSelect from './tree-select';
 import Uploader from './uploader';
 import Waterfall from './waterfall';
 
-const version = '1.2.41';
+const version = '1.3.2';
 const components = [
   Actionsheet,
   AddressEdit,
   AddressList,
   Area,
-  Avatar,
   Badge,
   BadgeGroup,
   Button,
   Card,
   Cell,
   CellGroup,
-  CellSwipe,
   Checkbox,
   CheckboxGroup,
   Circle,
@@ -97,17 +92,15 @@ const components = [
   ContactList,
   CouponCell,
   CouponList,
-  Crumb,
-  CrumbItem,
   DatetimePicker,
   Dialog,
-  EmployeeField,
   Field,
   GoodsAction,
   GoodsActionBigBtn,
   GoodsActionMiniBtn,
   Icon,
   ImagePreview,
+  Info,
   List,
   Loading,
   Locale,
@@ -133,6 +126,7 @@ const components = [
   Steps,
   SubmitBar,
   Swipe,
+  SwipeCell,
   SwipeItem,
   Switch,
   SwitchCell,
@@ -164,14 +158,12 @@ export {
   AddressEdit,
   AddressList,
   Area,
-  Avatar,
   Badge,
   BadgeGroup,
   Button,
   Card,
   Cell,
   CellGroup,
-  CellSwipe,
   Checkbox,
   CheckboxGroup,
   Circle,
@@ -183,17 +175,15 @@ export {
   ContactList,
   CouponCell,
   CouponList,
-  Crumb,
-  CrumbItem,
   DatetimePicker,
   Dialog,
-  EmployeeField,
   Field,
   GoodsAction,
   GoodsActionBigBtn,
   GoodsActionMiniBtn,
   Icon,
   ImagePreview,
+  Info,
   Lazyload,
   List,
   Loading,
@@ -220,6 +210,7 @@ export {
   Steps,
   SubmitBar,
   Swipe,
+  SwipeCell,
   SwipeItem,
   Switch,
   SwitchCell,

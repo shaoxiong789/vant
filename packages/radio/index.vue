@@ -1,5 +1,5 @@
 <template>
-  <div :class="b({ disabled: isDisabled })" @click.stop="$emit('click')">
+  <div :class="b({ disabled: isDisabled })" @click="$emit('click')">
     <span :class="b('input')">
       <input
         :value="name"
@@ -8,9 +8,9 @@
         :class="b('control')"
         :disabled="isDisabled"
       >
-      <icon :name="checked ? 'checked' : 'check'" />
+      <icon :name="currentValue === name ? 'checked' : 'check'" />
     </span>
-    <span v-if="$slots.default" :class="b('label')" @click.stop="onClickLabel">
+    <span v-if="$slots.default" :class="b('label', labelPosition)" @click="onClickLabel">
       <slot />
     </span>
   </div>
@@ -26,32 +26,21 @@ export default create({
   mixins: [findParent],
 
   props: {
-    keyName: null,
     name: null,
     value: null,
-    disabled: Boolean
+    disabled: Boolean,
+    labelDisabled: Boolean,
+    labelPosition: Boolean
   },
 
   computed: {
-    checked() {
-      if (!this.currentValue) {
-        return false;
-      }
-      if (this.keyName) {
-        return this.currentValue[this.keyName] === this.name[this.keyName];
-      }
-      return this.currentValue === this.name;
-    },
     currentValue: {
       get() {
         return this.parent ? this.parent.value : this.value;
       },
 
       set(val) {
-        (this.parent || this).$emit('input', null);
-        this.$nextTick(() => {
-          (this.parent || this).$emit('input', val);
-        });
+        (this.parent || this).$emit('input', val);
       }
     },
 
@@ -68,7 +57,7 @@ export default create({
 
   methods: {
     onClickLabel() {
-      if (!this.isDisabled) {
+      if (!this.isDisabled && !this.labelDisabled) {
         this.currentValue = this.name;
       }
     }

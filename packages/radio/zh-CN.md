@@ -60,8 +60,10 @@ export default {
 
 | 参数 | 说明 | 类型 | 默认值 |
 |-----------|-----------|-----------|-------------|
-| name | 唯一标识符 | 任意类型 | - |
+| name | 标识 Radio 名称 | 任意类型 | - |
 | disabled | 是否为禁用状态 | `Boolean` | `false` |
+| label-disabled | 是否禁用文本内容点击 | `Boolean` | `false` |
+| label-position | 文本位置，可选值为 `left` | `String` | `right` |
 
 ### RadioGroup API
 
@@ -75,3 +77,14 @@ export default {
 | 事件名称 | 说明 | 回调参数 |
 |-----------|-----------|-----------|
 | change | 当绑定值变化时触发的事件 | 当前选中项的 name |
+
+### 更新日志
+
+| 版本 | 类型 | 内容 |
+|-----------|-----------|-----------|
+| 1.2.0 | improvement | 优化样式 |
+| 1.1.13 | feature | 新增 label-position 属性 |
+| 1.1.13 | feature | 新增 label-disabled 属性 |
+| 1.0.5 | feature | name 属性支持任意类型 |
+| 0.12.1 | bugfix | 修复图标无法点击的问题 |
+| 0.11.6 | bugfix | 修复禁用态样式错误 |

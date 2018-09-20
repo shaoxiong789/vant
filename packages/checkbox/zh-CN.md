@@ -32,10 +32,30 @@ export default {
 <van-checkbox v-model="checked" disabled>复选框</van-checkbox>
 ```
 
-#### 禁用内容部分点击事件
+#### 自定义图标
+通过 icon 插槽自定义图标，可以通过 `slot-scope` 判断是否为选中状态
 
 ```html
-<van-checkbox v-model="checked" label-disabled>复选框</van-checkbox>
+<van-checkbox v-model="checked">
+  自定义图标
+  <img
+    slot="icon"
+    slot-scope="props"
+    :src="props.checked ? icon.active : icon.normal"
+  >
+</van-checkbox>
+```
+
+```js
+export default {
+  data() {
+    checked: true,
+    icon: {
+      normal: '//img.yzcdn.cn/icon-normal.png',
+      active: '//img.yzcdn.cn/icon-active.png'
+    }
+  }
+}
 ```
 
 #### Checkbox 组
@@ -81,26 +101,43 @@ export default {
 
 #### 与 Cell 组件一起使用
 
-此时你需要再引入`Cell`和`CellGroup`组件
+此时你需要再引入`Cell`和`CellGroup`组件，并通过 checkbox 的 toggle 方法手动触发切换
 
 ```html
 <van-checkbox-group v-model="result">
   <van-cell-group>
-    <van-cell v-for="item in list" :title="`复选框 ${item}`" :key="item">
-      <van-checkbox :name="item" />
+    <van-cell
+      v-for="item in list"
+      clickable
+      :key="item"
+      :title="`复选框 ${item}`"
+      @click="toggle(index)"
+    >
+      <van-checkbox :name="item" ref="checkboxes" />
     </van-cell>
   </van-cell-group>
 </van-checkbox-group>
+```
+
+```js
+export default {
+  methods: {
+    toggle(index) {
+      this.$refs.checkboxes[index].toggle();
+    }
+  }
+}
 ```
 
 ### Checkbox API
 
 | 参数 | 说明 | 类型 | 默认值 |
 |-----------|-----------|-----------|-------------|
-| v-model | 是否为选中状态 | `Boolean` | `false` |
 | name | 标识 Checkbox 名称 | `any` | - |
+| v-model | 是否为选中状态 | `Boolean` | `false` |
 | disabled | 是否禁用单选框 | `Boolean` | `false` |
 | label-disabled | 是否禁用单选框内容点击 | `Boolean` | `false` |
+| label-position | 文本位置，可选值为 `left` | `String` | `right` |
 | shape | 形状，可选值为 `round` `square` | `String` | `round` |
 
 ### CheckboxGroup API
@@ -122,3 +159,35 @@ export default {
 | 事件名称 | 说明 | 回调参数 |
 |-----------|-----------|-----------|
 | change | 当绑定值变化时触发的事件 | 当前组件的值 |
+
+### Checkbox Slot
+
+| 名称 | 说明 | slot-scope |
+|-----------|-----------|-----------|
+| - | 自定义文本 | - |
+| icon | 自定义图标 | checked: 是否为选中状态 |
+
+### Checkbox 方法
+
+通过 ref 可以获取到 checkbox 实例并调用实例方法
+
+| 方法名 | 参数 | 返回值 | 介绍 |
+|-----------|-----------|-----------|-------------|
+| toggle | - | - | 切换选中状态 |
+
+### 更新日志
+
+| 版本 | 类型 | 内容 |
+|-----------|-----------|-----------|
+| 1.1.12 | improvement | 新增 icon 插槽，支持自定义图标 |
+| 1.1.11 | improvement | 新增 label-position 属性 |
+| 1.1.8 | bugfix | 修复 v-model 类型检查错误 |
+| 1.1.0 | bugfix | 修复内容为空时渲染了空 label 元素的问题 |
+| 0.12.11 | improvement | 新增 label-disabled 属性，支持禁用 label 点击 |
+| 0.12.10 | improvement | 优化 DOM 结构 |
+| 0.12.10 | improvement | 新增 max 属性 |
+| 0.11.11 | bugfix | 修复 disabled 属性无法生效的问题 |
+| 0.11.6 | bugfix | 修复禁用态样式 |
+| 0.10.1 | bugfix | 修复微信浏览器下的边框渲染错误 |
+| 0.9.7 | improvement | 新增 shape 属性 |
+| 0.8.8 | improvement | 新增 change 事件 |
