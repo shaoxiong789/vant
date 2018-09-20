@@ -12,6 +12,7 @@
       <li
         v-for="(option, index) in options"
         v-html="getOptionText(option)"
+        :style="optionStyle"
         class="van-ellipsis"
         :class="b('item', {
           disabled: isDisabled(option),
@@ -25,10 +26,10 @@
 
 <script>
 import create from '../utils/create';
-import { isObj } from '../utils';
+import deepClone from '../utils/deep-clone';
+import { isObj, range } from '../utils';
 
 const DEFAULT_DURATION = 200;
-const range = (num, arr) => Math.min(Math.max(num, arr[0]), arr[1]);
 
 export default create({
   name: 'picker-column',
@@ -38,7 +39,7 @@ export default create({
     className: String,
     itemHeight: Number,
     visibleItemCount: Number,
-    options: {
+    initialOptions: {
       type: Array,
       default: () => []
     },
@@ -54,31 +55,24 @@ export default create({
       offset: 0,
       duration: 0,
       startOffset: 0,
+      options: deepClone(this.initialOptions),
       currentIndex: this.defaultIndex
     };
   },
 
   created() {
     this.$parent.children && this.$parent.children.push(this);
-  },
-
-  mounted() {
     this.setIndex(this.currentIndex);
   },
 
   destroyed() {
-    this.$parent.children && this.$parent.children.splice(this.$parent.children.indexOf(this), 1);
+    const { children } = this.$parent;
+    children && children.splice(children.indexOf(this), 1);
   },
 
   watch: {
     defaultIndex() {
       this.setIndex(this.defaultIndex);
-    },
-
-    options(next, prev) {
-      if (JSON.stringify(next) !== JSON.stringify(prev)) {
-        this.setIndex(0);
-      }
     }
   },
 
@@ -93,7 +87,7 @@ export default create({
 
     columnStyle() {
       return {
-        height: (this.itemHeight * this.visibleItemCount) + 'px'
+        height: this.itemHeight * this.visibleItemCount + 'px'
       };
     },
 
@@ -105,8 +99,10 @@ export default create({
       };
     },
 
-    currentValue() {
-      return this.options[this.currentIndex];
+    optionStyle() {
+      return {
+        height: this.itemHeight + 'px'
+      };
     }
   },
 
@@ -119,25 +115,27 @@ export default create({
 
     onTouchMove(event) {
       const deltaY = event.touches[0].clientY - this.startY;
-      this.offset = range(this.startOffset + deltaY, [
+      this.offset = range(
+        this.startOffset + deltaY,
         -(this.count * this.itemHeight),
         this.itemHeight
-      ]);
+      );
     },
 
     onTouchEnd() {
       if (this.offset !== this.startOffset) {
         this.duration = DEFAULT_DURATION;
-        const index = range(Math.round(-this.offset / this.itemHeight), [
+        const index = range(
+          Math.round(-this.offset / this.itemHeight),
           0,
           this.count - 1
-        ]);
+        );
         this.setIndex(index, true);
       }
     },
 
     adjustIndex(index) {
-      index = range(index, [0, this.count]);
+      index = range(index, 0, this.count);
       for (let i = index; i < this.count; i++) {
         if (!this.isDisabled(this.options[i])) return i;
       }
@@ -151,11 +149,13 @@ export default create({
     },
 
     getOptionText(option) {
-      return isObj(option) && this.valueKey in option ? option[this.valueKey] : option;
+      return isObj(option) && this.valueKey in option
+        ? option[this.valueKey]
+        : option;
     },
 
     setIndex(index, userAction) {
-      index = this.adjustIndex(index);
+      index = this.adjustIndex(index) || 0;
       this.offset = -index * this.itemHeight;
 
       if (index !== this.currentIndex) {
@@ -168,10 +168,13 @@ export default create({
       const { options } = this;
       for (let i = 0; i < options.length; i++) {
         if (this.getOptionText(options[i]) === value) {
-          this.setIndex(i);
-          return;
+          return this.setIndex(i);
         }
       }
+    },
+
+    getValue() {
+      return this.options[this.currentIndex];
     }
   }
 });

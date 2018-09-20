@@ -97,12 +97,33 @@ export default {
 | 参数 | 说明 | 类型 | 默认值 |
 |-----------|-----------|-----------|-------------|-------------|
 | name | 面板唯一标识符，默认为索引值 | `String | Number` | `index` |
-| title | 标题 | `String` | - |
-
+| icon | 标题栏左侧图标，可选值见 Icon 组件 | `String` | - |
+| title | 标题栏左侧内容 | `String | Number` | - |
+| value | 标题栏右侧内容 | `String | Number` | - |
+| label | 标题栏描述信息 | `String` | - |
+| border | 是否显示内边框 | `Boolean` | `true` |
+| is-link | 标题栏是否展示右侧箭头并开启点击反馈 | `Boolean` | `true` |
 
 ### CollapseItem Slot
 
 | 名称 | 说明 |
 |-----------|-----------|
-| default | 面板内容 |
-| title | 自定义标题内容 |
+| - | 面板内容 |
+| value | 自定义显示内容 |
+| icon | 自定义`icon` |
+| title | 自定义`title` |
+| right-icon | 自定义右侧按钮，默认是`arrow` |
+
+### 更新日志
+
+| 版本 | 类型 | 内容 |
+|-----------|-----------|-----------|
+| 1.2.1 | feature | 新增 icon 属性 |
+| 1.2.1 | feature | 新增 label 属性 |
+| 1.2.1 | feature | 新增 value 属性 |
+| 1.2.1 | feature | 新增 border 属性 |
+| 1.2.1 | feature | 新增 is-link 属性 |
+| 1.2.1 | feature | 新增 icon 属性 |
+| 1.1.14 | feature | 新增过渡动画 |
+| 1.1.14 | improvement | 渲染优化 |
+| 1.0.0 | feature | 新增组件 |

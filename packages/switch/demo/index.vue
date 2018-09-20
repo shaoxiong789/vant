@@ -15,10 +15,6 @@
     <demo-block :title="$t('advancedUsage')">
       <van-switch :value="checked2" size="36px" @input="onInput" />
     </demo-block>
-
-    <demo-block :title="$t('custom')">
-      <van-switch v-model="checked3" active-value="ON" inactive-value="OFF" />
-    </demo-block>
   </demo-section>
 </template>
 
@@ -27,21 +23,18 @@ export default {
   i18n: {
     'zh-CN': {
       title: '提醒',
-      message: '是否切换开关？',
-      custom: '自定义值'
+      message: '是否切换开关？'
     },
     'en-US': {
       title: 'Confirm',
-      message: 'Are you sure to toggle switch?',
-      custom: 'value is custom '
+      message: 'Are you sure to toggle switch?'
     }
   },
 
   data() {
     return {
       checked: true,
-      checked2: true,
-      checked3: 'OFF'
+      checked2: true
     };
   },
 

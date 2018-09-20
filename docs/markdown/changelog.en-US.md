@@ -1,5 +1,234 @@
 ## Changelog
 
+### [1.3.2](https://github.com/youzan/vant/tree/v1.3.2)
+`2018-09-14`
+
+**Improvements**
+
+- AddressEdit: optimize area label [\#1785](https://github.com/youzan/vant/pull/1785)
+- Dialog: update button color [\#1774](https://github.com/youzan/vant/pull/1774)
+- List: add loading slot [\#1804](https://github.com/youzan/vant/pull/1804)
+- Tab: optimize active color [\#1775](https://github.com/youzan/vant/pull/1775)
+- update border-color [\#1773](https://github.com/youzan/vant/pull/1773)
+
+**Bug Fixes**
+
+- fix hairline in Chrome 69 [\#1776](https://github.com/youzan/vant/pull/1776) [\#1805](https://github.com/youzan/vant/pull/1805)
+- fix AddressEdit missing border [\#1800](https://github.com/youzan/vant/pull/1800)
+- fix AddressList address not fully displayed [\#1786](https://github.com/youzan/vant/pull/1786)
+- fix Dialog type definition [\#1799](https://github.com/youzan/vant/pull/1799)
+
+
+### [1.3.1](https://github.com/youzan/vant/tree/v1.3.1)
+`2018-09-07`
+
+**Improvements**
+
+- Document: add vue-cli 3 guide [\#1754](https://github.com/youzan/vant/pull/1754)
+
+**Bug Fixes**
+
+- fix Button loading color [\#1768](https://github.com/youzan/vant/pull/1768)
+- fix ImagePreview type definition [\#1767](https://github.com/youzan/vant/pull/1767)
+- fix Tab color not work in card type [\#1763](https://github.com/youzan/vant/pull/1763)
+- fix lib dir babel runtime module [\#1753](https://github.com/youzan/vant/pull/1753)
+
+
+### [1.3.0](https://github.com/youzan/vant/tree/v1.3.0)
+`2018-08-31`
+
+**Breaking changes**
+
+- upgrade to babel 7, remove promise polyfill [\#1712](https://github.com/youzan/vant/pull/1712)
+- Sku: no longer support i18n [\#1734](https://github.com/youzan/vant/pull/1734)
+
+**Improvements**
+
+- upgrade to precss 3.0 [\#1696](https://github.com/youzan/vant/pull/1696)
+- AddressList: support disabled list [\#1729](https://github.com/youzan/vant/pull/1729)
+- Contact: upgrade style [\#1693](https://github.com/youzan/vant/pull/1693)
+- Popup: get-container support selector [\#1699](https://github.com/youzan/vant/pull/1699)
+- Popup: optimize animation duration [\#1694](https://github.com/youzan/vant/pull/1694)
+- Rate: add readonly prop [\#1731](https://github.com/youzan/vant/pull/1731)
+- Sku: support custom validator [\#1732](https://github.com/youzan/vant/pull/1732)
+- Tab: add scroll event [\#1730](https://github.com/youzan/vant/pull/1730)
+- Loading: support any color [\#1717](https://github.com/youzan/vant/pull/1717)
+
+**Bug Fixes**
+
+- fix bundle version wrong [\#1703](https://github.com/youzan/vant/pull/1703)
+- fix DatetimePicker incorrect value when use minMinute [\#1724](https://github.com/youzan/vant/pull/1724)
+- fix Swipe wrong position [\#1723](https://github.com/youzan/vant/pull/1723)
+- fix Tab should not swipe to disabled tab [\#1704](https://github.com/youzan/vant/pull/1704)
+- fix Tabbar: info not work when use icon slot [\#1705](https://github.com/youzan/vant/pull/1705)
+
+
+### [1.2.1](https://github.com/youzan/vant/tree/v1.2.1)
+`2018-08-24`
+
+**Improvements**
+
+- AddressEdit: optimize style [\#1676](https://github.com/youzan/vant/pull/1676)
+- ContactEdit: optimize style [\#1677](https://github.com/youzan/vant/pull/1677)
+- Collapse: add more props and slots [\#1671](https://github.com/youzan/vant/pull/1671)
+- Field: update clear icon color [\#1678](https://github.com/youzan/vant/pull/1678)
+- Icon: add class-prefix prop [\#1688](https://github.com/youzan/vant/pull/1688)
+- Swipe: support custom item width & height [\#1664](https://github.com/youzan/vant/pull/1664)
+
+**Bug Fixes**
+
+- fix Stepper value can not be zero [\#1687](https://github.com/youzan/vant/pull/1687)
+- fix Tab custom line color [\#1686](https://github.com/youzan/vant/pull/1686)
+- fix share icon font-weight [\#1670](https://github.com/youzan/vant/pull/1670)
+- fix Popup can not be destoryed when use get-container [\#1665](https://github.com/youzan/vant/pull/1665)
+
+
+### [1.2.0](https://github.com/youzan/vant/tree/v1.2.0)
+`2018-08-20`
+
+**Breaking changes**
+
+- AddressEdit: use camelcase data [\#1644](https://github.com/youzan/vant/pull/1644)
+- Coupon: use camelcase data [\#1643](https://github.com/youzan/vant/pull/1643)
+- CellSwipe: rename to SwipeCell [\#1652](https://github.com/youzan/vant/pull/1652)
+
+**Improvements**
+
+- Area: update province data [\#1653](https://github.com/youzan/vant/pull/1653)
+- AddressList: upgrade style, add slot [\#1628](https://github.com/youzan/vant/pull/1628)
+- Button: add square prop [\#1627](https://github.com/youzan/vant/pull/1627)
+- Coupon: upgrade style [\#1636](https://github.com/youzan/vant/pull/1636)
+- Icon: add aim icon [\#1655](https://github.com/youzan/vant/pull/1655)
+- Icon: update edit icon [\#1635](https://github.com/youzan/vant/pull/1635)
+- Radio: optimize style [\#1626](https://github.com/youzan/vant/pull/1626)
+- SubmitBar: upgrade style [\#1631](https://github.com/youzan/vant/pull/1631)
+- Tab : support custom color [\#1622](https://github.com/youzan/vant/pull/1622)
+- Tabbar: optimize DOM [\#1640](https://github.com/youzan/vant/pull/1640)
+
+**Bug Fixes**
+
+- fix AddressEdit show delete [\#1648](https://github.com/youzan/vant/pull/1648)
+- fix Icon size prop not work [\#1634](https://github.com/youzan/vant/pull/1634)
+
+### [1.1.16](https://github.com/youzan/vant/tree/v1.1.16)
+`2018-08-10`
+
+**Improvements**
+
+- Actionsheet: add select event [\#1594](https://github.com/youzan/vant/pull/1594)
+- ImagePreview: suppot onClose callback [\#1589](https://github.com/youzan/vant/pull/1589)
+- List: add check method [\#1590](https://github.com/youzan/vant/pull/1590)
+- Search: update style [\#1603](https://github.com/youzan/vant/pull/1603)
+
+**Bug Fixes**
+
+- fix Actionsheet item unclickable when loading [\#1587](https://github.com/youzan/vant/pull/1587)
+- fix DatetimePicker value uncorrect when use formatter [\#1591](https://github.com/youzan/vant/pull/1591)
+
+
+### [1.1.15](https://github.com/youzan/vant/tree/v1.1.15)
+`2018-08-03`
+
+**Improvements**
+
+- Button: add warning type [\#1558](https://github.com/youzan/vant/pull/1558)
+- SwipeCell: add open method [\#1546](https://github.com/youzan/vant/pull/1546)
+- DatetimePicker: support minute range [\#1583](https://github.com/youzan/vant/pull/1583)
+- Icon: add size prop [\#1555](https://github.com/youzan/vant/pull/1555)
+- Stepper: update disabled color [\#1560](https://github.com/youzan/vant/pull/1560)
+- Stepper: optimize input strategy [\#1534](https://github.com/youzan/vant/pull/1534)
+- Tab: support custom sticky offset top [\#1519](https://github.com/youzan/vant/pull/1519)
+
+**Bug Fixes**
+
+- fix Button text-size-adjust [\#1545](https://github.com/youzan/vant/pull/1545)
+- fix Field date type not work in iOS [\#1586](https://github.com/youzan/vant/pull/1586)
+- fix van-clearfix not work [\#1559](https://github.com/youzan/vant/pull/1559)
+- fix Tabbar should not trigger change event when active not change [\#1571](https://github.com/youzan/vant/pull/1571)
+
+
+### [1.1.14](https://github.com/youzan/vant/tree/v1.1.14)
+`2018-07-19`
+
+**Improvements**
+
+- Collapse: add transition animation [\#1500](https://github.com/youzan/vant/pull/1500)
+- CouponCell: optimize text [\#1499](https://github.com/youzan/vant/pull/1499)
+- Stepper: improve input experience  [\#1484](https://github.com/youzan/vant/pull/1484)
+- Tab: add change event [\#1503](https://github.com/youzan/vant/pull/1503)
+- DatetimePicker: support text formatter [\#1497](https://github.com/youzan/vant/pull/1497)
+
+**Bug Fixes**
+
+- fix Field inline-height [\#1486](https://github.com/youzan/vant/pull/1486)
+- fix AddressEdit string trim [\#1487](https://github.com/youzan/vant/pull/1487)
+- fix Progress nesting in Collapse [\#1513](https://github.com/youzan/vant/pull/1513)
+- fix Stepper integer in android [\#1482](https://github.com/youzan/vant/pull/1482)
+- fix Tab scroll position after activated [\#1512](https://github.com/youzan/vant/pull/1512)
+- fix Tab sticky in scroll element [\#1496](https://github.com/youzan/vant/pull/1496)
+
+
+### [1.1.13](https://github.com/youzan/vant/tree/v1.1.13)
+`2018-07-13`
+
+**Improvements**
+
+- Button: add plain prop [\#1444](https://github.com/youzan/vant/pull/1444)
+- Toast: improve type definition [\#1468](https://github.com/youzan/vant/pull/1468)
+- Dialog: improve type definition [\#1467](https://github.com/youzan/vant/pull/1467)
+- Radio: add label-position prop [\#1446](https://github.com/youzan/vant/pull/1446)
+- Radio: add label-disabled prop [\#1445](https://github.com/youzan/vant/pull/1445)
+- Search: should trigger blur after click search button [\#1448](https://github.com/youzan/vant/pull/1448)
+
+**Bug Fixes**
+
+- fix Swipe multi finger touch [\#1478](https://github.com/youzan/vant/pull/1478)
+- fix ImagePreview start position [\#1456](https://github.com/youzan/vant/pull/1456)
+- fix Picker incorrect option height in some android devices [\#1449](https://github.com/youzan/vant/pull/1449)
+- fix vue-lazyload version [\#1481](https://github.com/youzan/vant/pull/1481)
+
+
+### [1.1.12](https://github.com/youzan/vant/tree/v1.1.12)
+`2018-07-06`
+
+**Improvements**
+
+- Area: add reset method [\#1427](https://github.com/youzan/vant/pull/1427)
+- Checkbox: support custom icon [\#1414](https://github.com/youzan/vant/pull/1414)
+- Checkbox: with cell [\#1430](https://github.com/youzan/vant/pull/1430)
+- Swipe: not swipeable when page scrolling [\#1425](https://github.com/youzan/vant/pull/1425)
+- Swipe: window resize [\#1413](https://github.com/youzan/vant/pull/1413)
+
+**Bug Fixes**
+
+- fix Progress text empty [\#1411](https://github.com/youzan/vant/pull/1411)
+- fix Tab random insert order [\#1429](https://github.com/youzan/vant/pull/1429)
+- fix error when use Vue.use in typescript [\#1410](https://github.com/youzan/vant/pull/1410)
+- fix vant-css missing dependencies [\#1426](https://github.com/youzan/vant/pull/1426)
+
+
+### [1.1.11](https://github.com/youzan/vant/tree/v1.1.11)
+`2018-07-04`
+
+**Improvements**
+
+- Actionsheet: support lazy render [\#1365](https://github.com/youzan/vant/pull/1365)
+- AddressEdit: adjust event order [\#1402](https://github.com/youzan/vant/pull/1402)
+- SwitchCell: add size prop [\#1371](https://github.com/youzan/vant/pull/1371)
+- Checkbox: add label-position prop [\#1394](https://github.com/youzan/vant/pull/1394)
+- Picker: optimize render performance [\#1391](https://github.com/youzan/vant/pull/1391)
+- Tab: update card style [\#1364](https://github.com/youzan/vant/pull/1364)
+- Document: dialog before-close usage [\#1383](https://github.com/youzan/vant/pull/1383)
+
+**Bug Fixes**
+
+- fix Area error when city list empty [\#1374](https://github.com/youzan/vant/pull/1374)
+- fix DatetimePicker change event params [\#1370](https://github.com/youzan/vant/pull/1370)
+- fix Field readonly in safari [\#1399](https://github.com/youzan/vant/pull/1399)
+- fix Field should hide clear icon when readonly [\#1395](https://github.com/youzan/vant/pull/1395)
+- fix Tab insert order [\#1372](https://github.com/youzan/vant/pull/1372)
+
+
 ### [1.1.10](https://github.com/youzan/vant/tree/v1.1.10)
 `2018-06-28`
 
@@ -274,7 +503,7 @@
 
 * fix NavBar title max width limitation [\#867](https://github.com/youzan/vant/pull/867)
 * fix Button vertical align incorrect when loading [\#858](https://github.com/youzan/vant/pull/858)
-* fix CellSwipe should only trigger swipe when drag horizontally [\#866](https://github.com/youzan/vant/pull/866)
+* fix SwipeCell should only trigger swipe when drag horizontally [\#866](https://github.com/youzan/vant/pull/866)
 * fix ImagePreview manually close not work [\#864](https://github.com/youzan/vant/pull/864)
 * fix SubmitBar inherit wrong font size [\#857](https://github.com/youzan/vant/pull/857)
 * fix SwitchCell text vertical align [\#852](https://github.com/youzan/vant/pull/852)
@@ -358,7 +587,7 @@
 **Improvements**
 
 * AddressEdit: add show-delete prop [\#716](https://github.com/youzan/vant/pull/716)
-* CellSwipe: optimzie animation fluency [\#685](https://github.com/youzan/vant/pull/685)
+* SwipeCell: optimzie animation fluency [\#685](https://github.com/youzan/vant/pull/685)
 * Field: support autosize maxHeight & minHeight [\#718](https://github.com/youzan/vant/pull/718)
 * Locale: optimize i18n config [\#701](https://github.com/youzan/vant/pull/701)
 * PullRefresh: support trigger loading animation [\#684](https://github.com/youzan/vant/pull/684)
@@ -776,7 +1005,7 @@
 
 **Improvements**
 
-* CellSwipe: add onClose prop, support async controll [\#356](https://github.com/youzan/vant/pull/356)
+* SwipeCell: add onClose prop, support async controll [\#356](https://github.com/youzan/vant/pull/356)
 * Uploader: support inherit attrs [\#357](https://github.com/youzan/vant/pull/357)
 * optimize local compile speed [\#355](https://github.com/youzan/vant/pull/355)
 

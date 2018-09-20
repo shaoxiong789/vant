@@ -52,6 +52,7 @@ const registerRoute = (isDemo) => {
         if (!component) {
           return;
         }
+
         route.push({
           name: lang + '/' + path,
           component,
@@ -65,6 +66,7 @@ const registerRoute = (isDemo) => {
       }
     }
   });
+
   return route;
 };
 
