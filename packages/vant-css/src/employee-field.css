@@ -55,6 +55,9 @@
   margin-right: 10px;
   position: relative;
 }
+.action_result_item .avatar{
+  margin: auto;
+}
 .action_result_item .clear{
   position: absolute;
   right: 0px;
