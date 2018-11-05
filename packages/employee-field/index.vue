@@ -256,7 +256,11 @@ export default create({
     // window.setTimeout(() => {
     //   this.$refs.crumb.initScroll();
     // }, 500);
-    this.initDepartmentMap({ urlParams: { did }});
+    this.$nextTick(() => {
+      window.setTimeout(() => {
+        this.initDepartmentMap({ urlParams: { did }});
+      }, 200);
+    });
     // this.departmentRequest({ id: id, currentPage: 1 }).then((data) => {
     //   this.$set(this.departmentMap, id, data);
     //   this.employeeRequest({ departmentId: id }).then(() => {
