@@ -19,7 +19,18 @@
 <script>
 import create from '../utils/create';
 import findParent from '../mixins/find-parent';
+// eslint-disable-next-line no-extend-native
+Array.prototype.fakeFindIndex = function(cb, context) {
+  const array = this;
 
+  for (let i = 0; i < array.length; i++) {
+    const element = array[i];
+    if (cb.call(context, element, i, array)) {
+      return i;
+    }
+  }
+  return -1;
+};
 export default create({
   name: 'checkbox',
 
@@ -44,7 +55,7 @@ export default create({
     checked: {
       get() {
         return this.parent
-          ? (this.parent.value ? this.parent.value : []).findIndex((element) => {
+          ? (this.parent.value ? this.parent.value : []).fakeFindIndex((element) => {
             if (this.keyName) {
               return element[this.keyName] === this.name[this.keyName];
             }
@@ -62,7 +73,7 @@ export default create({
               return;
             }
             /* istanbul ignore else */
-            if (parentValue.findIndex((element) => {
+            if (parentValue.fakeFindIndex((element) => {
               if (this.keyName) {
                 return element[this.keyName] === this.name[this.keyName];
               }
@@ -72,7 +83,7 @@ export default create({
               parent.$emit('input', parentValue);
             }
           } else {
-            const index = parentValue.findIndex((element) => {
+            const index = parentValue.fakeFindIndex((element) => {
               if (this.keyName) {
                 return element[this.keyName] === this.name[this.keyName];
               }

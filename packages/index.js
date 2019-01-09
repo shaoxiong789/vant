@@ -7,9 +7,11 @@ import Avatar from './avatar';
 import Badge from './badge';
 import BadgeGroup from './badge-group';
 import Button from './button';
+import Camera from './camera';
 import Card from './card';
 import Cell from './cell';
 import CellGroup from './cell-group';
+import CellSwipe from './cell-swipe';
 import Checkbox from './checkbox';
 import CheckboxGroup from './checkbox-group';
 import Circle from './circle';
@@ -73,7 +75,7 @@ import TreeSelect from './tree-select';
 import Uploader from './uploader';
 import Waterfall from './waterfall';
 
-const version = '1.3.2';
+const version = '1.3.23';
 const components = [
   Actionsheet,
   AddressEdit,
@@ -83,9 +85,11 @@ const components = [
   Badge,
   BadgeGroup,
   Button,
+  Camera,
   Card,
   Cell,
   CellGroup,
+  CellSwipe,
   Checkbox,
   CheckboxGroup,
   Circle,
@@ -170,9 +174,11 @@ export {
   Badge,
   BadgeGroup,
   Button,
+  Camera,
   Card,
   Cell,
   CellGroup,
+  CellSwipe,
   Checkbox,
   CheckboxGroup,
   Circle,
