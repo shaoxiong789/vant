@@ -10,6 +10,7 @@
 @import "./common/animation.css";
 @import './info.css';
 @import './icon.css';
+@import './icon-custom.css';
 @import './loading.css';
 @import './button.css';
 @import './cell.css';

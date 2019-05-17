@@ -17,13 +17,21 @@ export default create({
 
   props: {
     title: String,
-    value: Boolean,
+    value: [Boolean, String, Number],
     border: Boolean,
     loading: Boolean,
     disabled: Boolean,
     size: {
       type: String,
       default: '26px'
+    },
+    activeValue: {
+      type: [String, Boolean, Number],
+      default: true
+    },
+    inactiveValue: {
+      type: [String, Boolean, Number],
+      default: false
     }
   },
 

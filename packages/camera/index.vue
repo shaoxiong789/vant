@@ -1,20 +1,22 @@
 <template>
   <div>
-    <div class="camera_title" v-if="name != ''">{{name}} {{placeholder}}</div>
+    <div class="camera_title" v-if="name != ''">{{ name }} {{ placeholder }}</div>
     <div class="camera_body">
       <div class="camera_box">
         <div class="camera_img_item list" v-for="(img, index) in imgArr" :key="index" :data-index="index">
-          <img :src="img.thumb" @click="previewImg($event, index)" />
+          <img :src="img.thumb" @click="previewImg($event, index)" >
           <van-icon v-if="edit" name="clear" style="position:absolute;top:-9px;right:-9px;color:red;font-size:18px;cursor:pointer;" @click="deleteImg(index)"/>
         </div>
-        <van-uploader v-if="envType != 'wq' && envType != 'dd' && edit" :after-read="onRead" style="padding:0 12px;float:left;" :style="{marginTop: marginTop}" accept="image/gif, image/jpeg, image/png" multiple>
+        <van-uploader
+          v-if="envType != 'wq' && envType != 'dd' && edit" :after-read="onRead" style="padding:0 12px;float:left;" :style="{marginTop: marginTop}" accept="image/gif, image/jpeg, image/png"
+          multiple>
           <van-icon :size="size+'px'" :name="iconName" :style="{color: color}" />
         </van-uploader>
         <div v-if="(envType == 'wq' || envType == 'dd') && edit" style="padding:0 12px;float:left;" @click="addPic" :style="{marginTop: marginTop}">
           <van-icon :size="size+'px'" :name="iconName" :style="{color: color}" />
         </div>
       </div>
-      <div class="van-field__error-message" v-if="errorMessage != ''">{{errorMessage}}</div>
+      <div class="van-field__error-message" v-if="errorMessage != ''">{{ errorMessage }}</div>
     </div>
   </div>
 </template>
@@ -82,12 +84,11 @@ export default create({
     return {};
   },
   computed: {
-    'marginTop': function () {
-      return this.imgArr.length == 0 ? '0px' : (40 - this.size) / 2 + 20 + 'px'
+    'marginTop'() {
+      return this.imgArr.length === 0 ? '0px' : (40 - this.size) / 2 + 20 + 'px';
     }
   },
   mounted() {
-    
   },
   methods: {
     onRead(file) {
@@ -100,14 +101,14 @@ export default create({
         }
         this.$emit('chooseImg', file);
       } else {
-        if ( max != 0) {
+        if (max !== 0) {
           this.$emit('chooseImg', file);
         }
       }
     },
     addPic() {
       const that = this;
-      if (that.envType == 'wq') {
+      if (that.envType === 'wq') {
         const success = function(images, uploded, newImage) {
           const imgArr = that.imgArr;
           var len = imgArr.length;
@@ -140,7 +141,7 @@ export default create({
         };
         window.nb.pickImage(params);
       }
-      if (that.envType == 'dd') {
+      if (that.envType === 'dd') {
         var len = that.imgArr.length;
         var max = that.max - len;
         that.dd.biz.util.uploadImage({
@@ -179,12 +180,12 @@ export default create({
         arr1.push(img.url);
         arr2.push(temp);
       }
-      if (this.envType == 'wq') {
+      if (this.envType === 'wq') {
         ImagePreview({
           images: arr1,
           startPosition: index
         });
-      } else if (this.envType == 'dd') {
+      } else if (this.envType === 'dd') {
         this.dd.biz.util.previewImage({
           urls: arr1, // 图片地址列表
           current: arr1[index], // 当前显示的图片链接
@@ -195,7 +196,7 @@ export default create({
       } else {
         fancyBox(e.target, arr2);
       }
-    },
+    }
   }
 });
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div
     :class="b({
-      on: value,
+      on: value === true || value == activeValue,
       disabled
     })"
     :style="style"
@@ -20,12 +20,20 @@ export default create({
   name: 'switch',
 
   props: {
-    value: Boolean,
+    value: [String, Boolean, Number],
     loading: Boolean,
     disabled: Boolean,
     size: {
       type: String,
       default: '30px'
+    },
+    activeValue: {
+      type: [String, Boolean, Number],
+      default: true
+    },
+    inactiveValue: {
+      type: [String, Boolean, Number],
+      default: false
     }
   },
 
@@ -40,6 +48,16 @@ export default create({
   methods: {
     onClick() {
       if (!this.disabled && !this.loading) {
+        if (this.activeValue === this.value) {
+          this.$emit('input', this.inactiveValue || !this.value);
+          this.$emit('change', this.inactiveValue || !this.value);
+          return;
+        }
+        if (this.inactiveValue === this.value) {
+          this.$emit('input', this.activeValue || !this.value);
+          this.$emit('change', this.activeValue || !this.value);
+          return;
+        }
         this.$emit('input', !this.value);
         this.$emit('change', !this.value);
       }

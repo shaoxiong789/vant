@@ -69,6 +69,8 @@ export default {
 | loading | 是否为加载状态 | `Boolean` | `false` |
 | disabled | 是否为禁用状态 | `Boolean` | `false` |
 | size | 开关尺寸 | `String` | `30px` |
+| active-value |	打开时的值 |	`any`	| `true`
+| inactive-value |	关闭时的值 |	`any`	| `false`
 
 ### Event
 

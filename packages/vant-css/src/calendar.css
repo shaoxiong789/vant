@@ -1,0 +1,32 @@
+.van-calendar .cell {
+  width: calc( 100vw / 7 - 10px );
+  height: calc( 100vw / 7 - 10px );
+  /* line-height: calc( 100vw / 7 - 10px ); */
+  text-align: center;
+  border-radius: 5em;
+  margin: 5px;
+}
+.van-calendar .other{
+  color: #ccc;
+}
+.van-calendar .today{
+  border: 1px solid rgb(3, 169, 244);
+}
+.van-calendar .selectday{
+  background: #03A9F4;
+}
+.van-calendar{
+  background: #fff;
+}
+.van-calendar .totoday{
+  height: 20px;
+  text-align: center;
+  display: inline-block;
+  width: 20px;
+  line-height: 20px;
+  font-size: 12px;
+  margin: 5px 0px;
+  border-radius: 20px;
+  border: 1px solid #03A9F4;
+  transform: scale(0.8);
+}

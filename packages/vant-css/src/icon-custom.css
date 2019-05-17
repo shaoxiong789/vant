@@ -1,0 +1,13 @@
+@font-face {
+  font-family: 'custom-iconfont';  /* project id 1040645 */
+  src: url('//at.alicdn.com/t/font_1040645_y6pcb7lgbrc.eot');
+  src: url('//at.alicdn.com/t/font_1040645_y6pcb7lgbrc.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1040645_y6pcb7lgbrc.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1040645_y6pcb7lgbrc.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1040645_y6pcb7lgbrc.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1040645_y6pcb7lgbrc.svg#iconfont') format('svg');
+}
+
+.van-icon {
+  font-family: 'vant-icon', 'custom-iconfont' !important;
+}

@@ -230,6 +230,15 @@ export default create({
       }, 30);
     },
 
+    JumpTo(index) {
+      this.swiping = true;
+      this.correctPosition();
+      // setTimeout(() => {
+      // this.swiping = false;
+      this.move(index % this.count - this.active);
+      // }, 0);
+    },
+
     correctPosition() {
       if (this.active <= -1) {
         this.move(this.count);

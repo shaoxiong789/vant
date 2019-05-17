@@ -12,7 +12,7 @@
         </template>
       </van-search>
       <div v-if="showAction" class="search_list">
-        <div v-if="searchEmployeesData.list.length>0" v-for="(itemData,k) in searchEmployeesData.list" :key="k">
+        <div v-for="(itemData,k) in searchEmployeesData.list" :key="k">
           <van-checkbox-group v-if="!radio" v-model="result[itemData.groupType]">
             <van-cell-group>
               <van-cell :title="employee.title" :label="employee.subTitle" class="employee_cell" v-for="(employee,index) in itemData.groupDatas" :key="index">
@@ -205,7 +205,7 @@ export default create({
     resultCount() {
       return Object.keys(this.result).reduce((count, key) => {
         if (!this.result[key]) {
-          return 0;
+          return count;
         }
         return count + this.result[key].length;
       }, 0);
@@ -357,6 +357,7 @@ export default create({
       console.log(1);
       if (this.search) {
         this.ajaxRequest({ url: this.searchData.search.url, urlParams: this.searchData.search.urlParams, key: this.search }).then(({ sections }) => {
+          // this.searchEmployeesData.list = sections;
           this.searchEmployeesData.list = sections;
           // this.$set(this.departmentMap, urlParams.did, data);
           // this.searchShow = data.search.show;

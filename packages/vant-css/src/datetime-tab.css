@@ -1,0 +1,43 @@
+.van-datetime-tab {
+  background: #fff;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  max-width: 630px;
+  max-height: 630px;
+  font-size: 18px;
+  height: calc(100vw + 80px);
+}
+.van-datetime-tab .van-tab {
+  font-size: 15px;
+}
+.van-datetime-tab .calendarFlag {
+  position: relative;
+}
+.van-datetime-tab .calendarFlag:after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+  content: "";
+  display: block;
+  width: 4px;
+  height: 4px;
+  background: red;
+  border-radius: 50%;
+}
+.van-datetime-tab .van-tabs__wrap {
+  max-width: 630px;
+  width: calc(100vw - 80px);
+}
+.van-datetime-tab .tab-sure-button {
+  position: absolute;
+  z-index: 9999;
+  right: 15px;
+  top: 13px;
+  font-size: 15px;
+  color: #38f;
+  cursor: pointer;
+}

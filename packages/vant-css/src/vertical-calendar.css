@@ -1,0 +1,68 @@
+.van-vertical-calendar .cell {
+  width: calc(100vw / 7);
+  height: calc(100vw / 7);
+  max-width: calc(630px / 7);
+  max-height: calc(630px / 7);
+  box-sizing: border-box;
+  text-align: center;
+  border-radius: 5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.van-vertical-calendar .van-swipe {
+  height: calc(calc(100vw / 7) * 6);
+  max-width: 630px;
+  max-height: 560px;
+}
+.van-vertical-calendar .van-swipe .van-row {
+  height: calc(calc(100vw / 7) * 6);
+  max-width: 630px;
+  max-height: 560px;
+}
+.van-vertical-calendar .vertical-calendar-title {
+  background: #f4f9ff;
+  color: #2292ff;
+  font-size: 14px;
+}
+.van-vertical-calendar .slot-class {
+  height: calc(100vw / 7);
+  max-height: calc(630px / 7);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.van-vertical-calendar .slot-content {
+  font-size: 14px;
+  padding: 2px 0;
+  color: #999;
+}
+.van-vertical-calendar .today {
+  color: #03a9f4;
+}
+.van-vertical-calendar .today .slot-content {
+  color: #03a9f4;
+}
+.van-vertical-calendar .selectday {
+  background: #03a9f4;
+  color: #fff;
+}
+.van-vertical-calendar .selectday .slot-content {
+  color: #fff;
+}
+.van-vertical-calendar {
+  background: #fff;
+}
+.van-vertical-calendar .totoday {
+  height: 20px;
+  text-align: center;
+  display: inline-block;
+  width: 20px;
+  line-height: 20px;
+  font-size: 12px;
+  margin: 5px 0px;
+  border-radius: 20px;
+  border: 1px solid #03a9f4;
+  transform: scale(0.8);
+}

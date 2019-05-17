@@ -7,6 +7,7 @@ import Avatar from './avatar';
 import Badge from './badge';
 import BadgeGroup from './badge-group';
 import Button from './button';
+import Calendar from './calendar';
 import Camera from './camera';
 import Card from './card';
 import Cell from './cell';
@@ -26,6 +27,7 @@ import CouponList from './coupon-list';
 import Crumb from './crumb';
 import CrumbItem from './crumb-item';
 import DatetimePicker from './datetime-picker';
+import DatetimeTab from './datetime-tab';
 import Dialog from './dialog';
 import EmployeeField from './employee-field';
 import Field from './field';
@@ -70,12 +72,14 @@ import Tabbar from './tabbar';
 import TabbarItem from './tabbar-item';
 import Tabs from './tabs';
 import Tag from './tag';
+import TimePicker from './time-picker';
 import Toast from './toast';
 import TreeSelect from './tree-select';
 import Uploader from './uploader';
+import VerticalCalendar from './vertical-calendar';
 import Waterfall from './waterfall';
 
-const version = '1.3.23';
+const version = '1.3.42';
 const components = [
   Actionsheet,
   AddressEdit,
@@ -85,6 +89,7 @@ const components = [
   Badge,
   BadgeGroup,
   Button,
+  Calendar,
   Camera,
   Card,
   Cell,
@@ -104,6 +109,7 @@ const components = [
   Crumb,
   CrumbItem,
   DatetimePicker,
+  DatetimeTab,
   Dialog,
   EmployeeField,
   Field,
@@ -147,9 +153,11 @@ const components = [
   TabbarItem,
   Tabs,
   Tag,
+  TimePicker,
   Toast,
   TreeSelect,
-  Uploader
+  Uploader,
+  VerticalCalendar
 ];
 
 const install = Vue => {
@@ -174,6 +182,7 @@ export {
   Badge,
   BadgeGroup,
   Button,
+  Calendar,
   Camera,
   Card,
   Cell,
@@ -193,6 +202,7 @@ export {
   Crumb,
   CrumbItem,
   DatetimePicker,
+  DatetimeTab,
   Dialog,
   EmployeeField,
   Field,
@@ -237,9 +247,11 @@ export {
   TabbarItem,
   Tabs,
   Tag,
+  TimePicker,
   Toast,
   TreeSelect,
   Uploader,
+  VerticalCalendar,
   Waterfall
 };
 

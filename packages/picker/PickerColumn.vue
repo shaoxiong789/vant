@@ -1,16 +1,11 @@
 
 <template>
   <div
-    :class="[b(), className]"
-    :style="columnStyle"
-    @touchstart="onTouchStart"
-    @touchmove.prevent="onTouchMove"
-    @touchend="onTouchEnd"
-    @touchcancel="onTouchEnd"
-  >
+    :class="[b(), className]" :style="columnStyle" @touchstart="onTouchStart" @touchmove.prevent="onTouchMove" @mousewheel.prevent="onMousewheel"
+    @touchend="onTouchEnd" @touchcancel="onTouchEnd">
     <ul :style="wrapperStyle">
       <li
-        v-for="(option, index) in options"
+        v-for="(option, index) in options" :key="index"
         v-html="getOptionText(option)"
         :style="optionStyle"
         class="van-ellipsis"
@@ -82,7 +77,7 @@ export default create({
     },
 
     baseOffset() {
-      return this.itemHeight * (this.visibleItemCount - 1) / 2;
+      return (this.itemHeight * (this.visibleItemCount - 1)) / 2;
     },
 
     columnStyle() {
@@ -120,6 +115,36 @@ export default create({
         -(this.count * this.itemHeight),
         this.itemHeight
       );
+    },
+
+    onMousewheel(event) {
+      if (event.wheelDelta) {
+        // 判断浏览器IE，谷歌滑轮事件
+        if (event.wheelDelta > 0) {
+          // 当滑轮向上滚动时
+          this.offset = this.offset + this.baseOffset / 2;
+        }
+        if (event.wheelDelta < 0) {
+          // 当滑轮向下滚动时
+          this.offset = this.offset - this.baseOffset / 2;
+        }
+      } else if (event.detail) {
+        // Firefox滑轮事件
+        if (event.detail > 0) {
+          // 当滑轮向上滚动时
+          this.offset = this.offset + this.baseOffset / 2;
+        }
+        if (event.detail < 0) {
+          // 当滑轮向下滚动时
+          this.offset = this.offset - this.baseOffset / 2;
+        }
+      }
+      const index = range(
+        Math.round(-this.offset / this.itemHeight),
+        0,
+        this.count - 1
+      );
+      this.setIndex(index, true);
     },
 
     onTouchEnd() {

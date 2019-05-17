@@ -15,7 +15,12 @@
     <demo-block :title="$t('advancedUsage')">
       <van-switch :value="checked2" size="36px" @input="onInput" />
     </demo-block>
+
+    <demo-block title="自定义">
+      <van-switch v-model="checked3" active-value="ON" inactive-value="OFF"/>
+    </demo-block>
   </demo-section>
+
 </template>
 
 <script>
@@ -34,7 +39,8 @@ export default {
   data() {
     return {
       checked: true,
-      checked2: true
+      checked2: true,
+      checked3: 'ON'
     };
   },
 

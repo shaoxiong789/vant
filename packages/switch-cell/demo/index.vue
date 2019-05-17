@@ -6,6 +6,12 @@
       </van-cell-group>
     </demo-block>
 
+    <demo-block :title="$t('basicUsage')">
+      <van-cell-group>
+        <van-switch-cell v-model="ischeck" active-value="1" inactive-value="0" :title="$t('title')" />
+      </van-cell-group>
+    </demo-block>
+
     <demo-block :title="$t('disabled')">
       <van-cell-group>
         <van-switch-cell v-model="checked" disabled :title="$t('title')" />
@@ -17,6 +23,7 @@
         <van-switch-cell v-model="checked" loading :title="$t('title')" />
       </van-cell-group>
     </demo-block>
+
   </demo-section>
 </template>
 
@@ -24,7 +31,8 @@
 export default {
   data() {
     return {
-      checked: true
+      checked: true,
+      ischeck: '1'
     };
   }
 };

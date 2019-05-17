@@ -1,0 +1,1 @@
+.van-crumb{line-height:30px;font-size:14px;overflow:hidden}.van-crumb ul{white-space:nowrap;overflow:hidden}.van-crumb-item:last-child{color:#999!important}.van-crumb-item:last-child:after{display:none}.van-crumb-item{float:left;color:#3c99d8}.van-crumb-item:after{content:'>';color:#ccc;line-height:1.8;padding:0 10px}

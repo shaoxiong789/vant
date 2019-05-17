@@ -7,7 +7,7 @@
         v-waterfall-lower="loadMore"
         waterfall-disabled="disabled"
         waterfall-offset="400">
-        <li v-for="item in list">{{ item }}</li>
+        <li v-for="(item,index) in list" :key="index">{{ item }}</li>
       </ul>
     </demo-block>
   </demo-section>

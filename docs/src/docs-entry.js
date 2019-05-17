@@ -25,6 +25,7 @@ export default {
   'badge.zh-CN': () => import('../../packages/badge/zh-CN.md'),
   'button.en-US': () => import('../../packages/button/en-US.md'),
   'button.zh-CN': () => import('../../packages/button/zh-CN.md'),
+  'calendar.zh-CN': () => import('../../packages/calendar/zh-CN.md'),
   'camera.en-US': () => import('../../packages/camera/en-US.md'),
   'camera.zh-CN': () => import('../../packages/camera/zh-CN.md'),
   'card.en-US': () => import('../../packages/card/en-US.md'),
@@ -48,6 +49,8 @@ export default {
   'crumb.zh-CN': () => import('../../packages/crumb/zh-CN.md'),
   'datetime-picker.en-US': () => import('../../packages/datetime-picker/en-US.md'),
   'datetime-picker.zh-CN': () => import('../../packages/datetime-picker/zh-CN.md'),
+  'datetime-tab.en-US': () => import('../../packages/datetime-tab/en-US.md'),
+  'datetime-tab.zh-CN': () => import('../../packages/datetime-tab/zh-CN.md'),
   'dialog.en-US': () => import('../../packages/dialog/en-US.md'),
   'dialog.zh-CN': () => import('../../packages/dialog/zh-CN.md'),
   'employee-field.zh-CN': () => import('../../packages/employee-field/zh-CN.md'),
@@ -117,6 +120,8 @@ export default {
   'tabbar.zh-CN': () => import('../../packages/tabbar/zh-CN.md'),
   'tag.en-US': () => import('../../packages/tag/en-US.md'),
   'tag.zh-CN': () => import('../../packages/tag/zh-CN.md'),
+  'time-picker.en-US': () => import('../../packages/time-picker/en-US.md'),
+  'time-picker.zh-CN': () => import('../../packages/time-picker/zh-CN.md'),
   'toast.en-US': () => import('../../packages/toast/en-US.md'),
   'toast.zh-CN': () => import('../../packages/toast/zh-CN.md'),
   'tree-select.en-US': () => import('../../packages/tree-select/en-US.md'),
@@ -125,6 +130,7 @@ export default {
   'uploader.zh-CN': () => import('../../packages/uploader/zh-CN.md'),
   'vant-css.en-US': () => import('../../packages/vant-css/en-US.md'),
   'vant-css.zh-CN': () => import('../../packages/vant-css/zh-CN.md'),
+  'vertical-calendar.zh-CN': () => import('../../packages/vertical-calendar/zh-CN.md'),
   'waterfall.en-US': () => import('../../packages/waterfall/en-US.md'),
   'waterfall.zh-CN': () => import('../../packages/waterfall/zh-CN.md')
 };

@@ -9,6 +9,7 @@ export default {
   'avatar': () => wrapper(import('../../packages/avatar/demo'), 'avatar'),
   'badge': () => wrapper(import('../../packages/badge/demo'), 'badge'),
   'button': () => wrapper(import('../../packages/button/demo'), 'button'),
+  'calendar': () => wrapper(import('../../packages/calendar/demo'), 'calendar'),
   'camera': () => wrapper(import('../../packages/camera/demo'), 'camera'),
   'card': () => wrapper(import('../../packages/card/demo'), 'card'),
   'cell': () => wrapper(import('../../packages/cell/demo'), 'cell'),
@@ -21,6 +22,7 @@ export default {
   'coupon-list': () => wrapper(import('../../packages/coupon-list/demo'), 'coupon-list'),
   'crumb': () => wrapper(import('../../packages/crumb/demo'), 'crumb'),
   'datetime-picker': () => wrapper(import('../../packages/datetime-picker/demo'), 'datetime-picker'),
+  'datetime-tab': () => wrapper(import('../../packages/datetime-tab/demo'), 'datetime-tab'),
   'dialog': () => wrapper(import('../../packages/dialog/demo'), 'dialog'),
   'employee-field': () => wrapper(import('../../packages/employee-field/demo'), 'employee-field'),
   'field': () => wrapper(import('../../packages/field/demo'), 'field'),
@@ -55,9 +57,11 @@ export default {
   'tab': () => wrapper(import('../../packages/tab/demo'), 'tab'),
   'tabbar': () => wrapper(import('../../packages/tabbar/demo'), 'tabbar'),
   'tag': () => wrapper(import('../../packages/tag/demo'), 'tag'),
+  'time-picker': () => wrapper(import('../../packages/time-picker/demo'), 'time-picker'),
   'toast': () => wrapper(import('../../packages/toast/demo'), 'toast'),
   'tree-select': () => wrapper(import('../../packages/tree-select/demo'), 'tree-select'),
   'uploader': () => wrapper(import('../../packages/uploader/demo'), 'uploader'),
   'vant-css': () => wrapper(import('../../packages/vant-css/demo'), 'vant-css'),
+  'vertical-calendar': () => wrapper(import('../../packages/vertical-calendar/demo'), 'vertical-calendar'),
   'waterfall': () => wrapper(import('../../packages/waterfall/demo'), 'waterfall')
 };

@@ -13,7 +13,7 @@
 }
 .search_list{
   height: calc(100% - 42px);
-  overflow: hidden;
+  overflow: auto;
   position: relative;
 }
 .wq_employee_field{
@@ -51,6 +51,7 @@
 }
 .action_result_item{
   height: 48px;
+  width: 36px;
   text-align: center;
   margin-right: 10px;
   position: relative;
